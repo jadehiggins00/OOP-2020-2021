@@ -48,13 +48,13 @@ public class Main
     public static void main(String[] args)
     {
         Main main = new Main();
-        // main.helloProcessing2();
-        main.BugZap();
+        main.helloProcessing2();
+        // main.BugZap();
     }
 
     //starting the BugZap file
-    public void BugZap(){
-        String[] a = {"MAIN"};
-        processing.core.PApplet.runSketch( a, new BugZap());
-    }//end method
+    // public void BugZap(){
+    //     String[] a = {"MAIN"};
+    //     processing.core.PApplet.runSketch( a, new BugZap());
+    // }//end method
 } 
