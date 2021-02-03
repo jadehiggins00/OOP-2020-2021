@@ -29,15 +29,16 @@ public class BugZap extends PApplet {
     public void drawPlayer(float x, float y, float w){
         fill(50, 168, 166);
         square(x,y,w);
-    
-
-    }//end method
-
-    public void playerLaser(float x, float y, float w){
         fill(255, 255, 255);
         line (200, 300, 100, 50);
 
-    }//end mehtod
+    }//end method
+
+    // public void playerLaser(float x, float y, float w){
+    //     fill(255, 255, 255);
+    //     line (200, 300, 100, 50);
+
+    // }//end mehtod
     
     public void draw(){
 
@@ -66,7 +67,7 @@ public class BugZap extends PApplet {
 		}
 		if (key == ' ')
 		{
-            playerLaser(playerX, playerY, playerWidth);
+            line(100,200,300,100);
             
 			System.out.println("SPACE key pressed");
 		}
