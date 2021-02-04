@@ -67,7 +67,7 @@ public class BugZap extends PApplet {
 		}
 		if (key == ' ')
 		{
-            line(100,200,300,100);
+            line(playerX, playerY, playerX, 0);
             
 			System.out.println("SPACE key pressed");
 		}
