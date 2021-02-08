@@ -48,7 +48,7 @@ public class Main
     //creating to call bugzap class
     public void BugZap(){
         String[] a = {"MAIN"};
-        processing.core.PApplet.runSketch( a, new BugZap());
+        processing.core.PApplet.runSketch( a, new BugZap()); //instaniate bug class
 
     }//end method
 

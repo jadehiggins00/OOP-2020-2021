@@ -2,29 +2,78 @@ package ie.tudublin;
 
 import processing.core.PApplet;
 
+// class name has to match the file name
 public class BugZap extends PApplet {
     
-    float playerX;
-    float playerY;
-    float playerWidth;
-    // float playerHeight;
-
-    public void settings(){
+	public void settings(){
 
         size(500,500);
 
     }//end method
 
-    public void setup() {
-        //width and height of vars only get assigned after the size is called
-        playerWidth = 40;
-        // playerHeight = 30;
-
-        playerX = width/2;
-        playerY = height/2;
-        // playerX = height/2;
-        
+	public void setup() {
+        //calling the reset method
+		reset();
     }//end method
+
+    float playerX;
+    float playerY;
+    float playerWidth;
+    
+	//making variable for the bug
+	float bugX, bugY, bugWidth = 30;
+	float halfBugWidth = playerWidth / 2;
+
+	//score var
+	int score = 0;
+
+	// this method resets the bug and assigns the player to the starting position
+	void reset() {
+		resetBug();
+		// these var dont get assigned values until the size() is called 
+		playerX = width /2;
+		//this means it is 50 pixels up from the screen
+		playerY = height - 50;
+
+	}//end method
+
+	// everytime the playe shoots the bug, the user wants to assign it back to its starting position
+	void resetBug() {
+		// want to start the bug at least half of the bug into the screen ( so that it appears on screen) 
+		// and to minus the halfbugwidth from the width for the right side of the screen
+		bugX = random(halfBugWidth, width - halfBugWidth);
+		// width is equalled to 50px
+		bugY = 50;
+
+	}//end method
+
+   // draw the bug
+   void drawBug(float x, float y){
+
+		//draw the bug
+		// this is used to add colour to the outline of the shape or line
+		stroke(255); // 255 is white
+		float saucerHeight = bugWidth * 0.7f; // var for the saucer
+		// this draws the two lines at the side of the bug - LEFT SIDE
+		line(x, y - saucerHeight, x - halfBugWidth, y);
+		// this draws the line at the RIGHT SIDE of the bug
+		line(x, y - saucerHeight, x + halfBugWidth, y);
+		//line(x - halfBugWidth, y, x - halfBugWidth, y);
+		// this draws the line at the bottom of the triangle
+		line(x - halfBugWidth, y, x + halfBugWidth, y);
+		// drawing the two feet for the bug
+		float feet = bugWidth * 0.1f;
+		//two feet
+		line(x - feet, y, x - halfBugWidth, y + halfBugWidth);
+		line(x + feet, y, x + halfBugWidth, y + halfBugWidth);
+
+		//drawing the eyes
+		float eyes = bugWidth * 1.0f;
+		line(x - eyes, y - eyes, x - eyes, y - eyes * 2f);
+		line(x + eyes, y - eyes, x + eyes, y - eyes * 2f);
+   }//end method
+
+
 
     public void drawPlayer(float x, float y, float w){
         fill(50, 168, 166);
