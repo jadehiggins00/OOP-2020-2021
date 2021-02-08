@@ -18,7 +18,8 @@ public class BugZap extends PApplet {
 
     float playerX;
     float playerY;
-    float playerWidth;
+    float playerWidth = 40;
+	float halfPlayerWidth = playerWidth / 2;
     
 	//making variable for the bug
 	float bugX, bugY, bugWidth = 30;
@@ -76,10 +77,20 @@ public class BugZap extends PApplet {
 
 
     public void drawPlayer(float x, float y, float w){
-        fill(50, 168, 166);
-        square(x,y,w);
-        fill(255, 255, 255);
-        line (200, 300, 100, 50);
+		stroke(255);
+		// drawing the player
+		float playerHeight = w / 2;
+		line(x - halfPlayerWidth, y + playerHeight, x + halfPlayerWidth, y + playerHeight);
+		line(x - halfPlayerWidth, y + playerHeight, x - halfPlayerWidth, y + playerHeight * 0.5f);
+		line(x + halfPlayerWidth, y + playerHeight, x + halfPlayerWidth, y + playerHeight * 0.5f);
+
+		line(x - halfPlayerWidth, y + playerHeight * 0.5f, x - (halfPlayerWidth * 0.8f), y + playerHeight * 0.3f);
+		line(x + halfPlayerWidth, y + playerHeight * 0.5f, x + (halfPlayerWidth * 0.8f), y + playerHeight * 0.3f);
+
+		line(x - (halfPlayerWidth * 0.8f), y + playerHeight * 0.3f, x + (halfPlayerWidth * 0.8f),
+				y + playerHeight * 0.3f);
+
+		line(x, y, x, y + playerHeight * 0.3f);
 
     }//end method
 
