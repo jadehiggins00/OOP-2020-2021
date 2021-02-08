@@ -23,15 +23,25 @@ public class Loops extends PApplet {
     }
 
     public void setup() {
-        colorMode(HSB);
+        colorMode(HSB); // another way of doing colours // h - colour s- saturation b - brightness
     }
 
     public void draw() {
         background(0);
+        noStroke();
         switch (mode)
         {
             case 0:
-                ellipse(cx, cy, 100, 100);
+            if(mouseX < cx){
+                fill(50,255,255);
+                rect(0,0,cx,height);
+            }
+
+            else {
+                rect(cx,0,cx,height);
+            }//end else
+            break;
+                // ellipse(cx, cy, 100, 100);
                 break;
         }
     }
