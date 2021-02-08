@@ -113,11 +113,16 @@ public class BugZap extends PApplet {
 
     public void keyPressed()
 	{
+		//left arrow
 		if (keyCode == LEFT)
 		{
-            //decremeting the variable so that it moves left
-            playerX --;
-			System.out.println("Left arrow pressed");
+			// if the player reaches the side of the screen  nad makes sure it doesnt go off the screen
+			if (playerX > halfPlayerWidth){
+            	//decremeting the variable so that it moves left
+            	playerX -= playerSpeed;
+				System.out.println("Left arrow pressed");
+
+			}//end inner if
 		}
 		if (keyCode == RIGHT)
 		{
