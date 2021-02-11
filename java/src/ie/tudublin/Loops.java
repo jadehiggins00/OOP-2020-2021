@@ -230,6 +230,14 @@ public class Loops extends PApplet {
 
             }//end
             break;
+
+            case 10: {
+
+                
+
+
+            }//end case 10
+            break;
             default:{
 
             }
