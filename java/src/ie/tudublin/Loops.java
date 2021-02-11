@@ -26,30 +26,46 @@ public class Loops extends PApplet {
     public void setup() {
         colorMode(HSB);
     }
-
+    float offset =0;
     public void draw() {
         background(0);
         noStroke(); 
         switch (mode)
         {
-            case 0:
-                if(mouseX < cx){
-                    fill(50,255,255);
-                    rect(0,0,cx,height);
+            // noStroke(0);
+            case 0:{
+
+                // width of the button
+                float w = 200;
+                float h = 50;
+                rectMode(CENTER); // FIRST 2 PARAMETERS
+                fill(50,255,255);
+                if(mouseX > cx - (w/2) && mouseX < cx + (w/2) && mouseY > cy - (h/2) && mouseY < cy +(h/2)){
+
 
                 }//end if
 
                 else {
-                    rect(cx,0,cx,height);
+                    fill(200,255,255);
+                    rect(cx,cy,w,h);
                 }//end else
-                break;
+                // if(mouseX < cx){
+                //     fill(50,255,255);
+                //     rect(0,0,cx,height);
+
+                // }//end if
+
+                // else {
+                //     rect(cx,0,cx,height);
+                // }//end else
+                // break;
 
                 // ellipse(cx, cy, 100, 100);
                 // break;
-
+                }
+                break;
             case 1:{
 
-                fill(50,255,255);
                 // top quadrant
                 if(mouseX < cx && mouseY < cy){
                     //cx and cy is the width of the rectangle
@@ -121,28 +137,99 @@ public class Loops extends PApplet {
             break;
 
             case 5: {
-
-                int numSquares = (int) (mouseX / 2.0f);
-                float theta = TWO_PI / (float) numSquares; // angle bwteen the five lines
+                rectMode(CORNER);
+                int numSquares = (int) (mouseX / 10);
+                float w = width / (float) numSquares;
                 float cgap = 255 / (float) numSquares;
 
                 for(int i= 0 ; i < numSquares; i ++){
 
-                    float angle = theta * i;
-                    float x = cos(angle) * numSquares;
-                    float y = sin(angle) * numSquares;
+                    fill(i * cgap, 255,255);   
+              
+                    rect(i*w, i*w, w, w);
+                
+                }//end for loop
+            }//end case 5
+            break;
+
+            case 6: {
+                rectMode(CORNER);
+                int numSquares = (int) (mouseX / 10);
+                float w = width / (float) numSquares;
+                float cgap = 255 / (float) numSquares;
+
+                for(int i= 0 ; i < numSquares; i ++){
 
                     fill(i * cgap, 255,255);   
-                    // w/2 because you have to start with haldf of the circle
-                    rect(cx,cy,cx + x,cy+y);
+                    rect(i*w, i*w, w, w);
+                    rect(width -((i+1)*w), i * w,w,w);
                 
                 }//end for loop
 
 
-
-            }//end case 5
+            }
             break;
 
+            case 7: {
+
+                int numCircles = (int) mouseX /10;
+                float cgap = 255 / (float) numCircles;
+                float gap = width / (float) numCircles;
+                float w = width;
+                for(int i= 0 ; i < numCircles; i ++){
+
+                   fill(i * cgap, 255,255);
+                   ellipse(cx,cy,w,w);
+                    w-=gap;
+                }//end for loop
+
+
+
+            }
+            break;
+
+            case 8: {
+                offset += (mouseX /100);
+                int numCircles = 20;
+                float w  = width / (float) numCircles;
+                float cgap = 255/ (numCircles + numCircles);
+                for(int i= 0 ; i < numCircles; i ++){
+
+                    for ( int j = 0;j<numCircles;j++){
+                        float c = ((cgap * (i+j)) + offset) % 255;
+                        fill(c,255,255);
+                        ellipse((w / 2) + w * j,(w / 2) + w * i, w,w);
+                    }
+            
+                    
+                }
+
+
+
+            }
+            break;
+
+            case 9: {
+
+                int sides =  (mouseX /10);
+
+                float theta = TWO_PI / (float) sides;
+                float radius = 200;
+                stroke(255);
+                for (int i = 1; i<= sides; i ++){
+
+                    float x1 = sin(theta * (i -1)) * radius;
+                    float y1 = cos(theta * (i - 1)) * radius;
+                    float x2 = sin(theta * i) * radius;
+                    float y2 = cos(theta * i) * radius;
+                    line(cx +x1, cy+ y1, cx+x2,cy + y2);
+
+
+                }
+
+
+            }//end
+            break;
             default:{
 
             }
