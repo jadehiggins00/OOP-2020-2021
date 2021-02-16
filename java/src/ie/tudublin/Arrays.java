@@ -29,10 +29,30 @@ public class Arrays extends PApplet {
             text(i, x, border * 0.5f);
             text(i, border * 0.5f, x);
 
-        }
+        }//end forloop
+    }//end method
 
+    public void drawLines() {
 
-    }
+        stroke(0,255,0);
+        float border = width * .10f;
+        textAlign(CENTER,CENTER);
+        for(int i= -5 ; i<=5; i++){
+            float x = map(i,-5,5,border, width - border);
+            // shows vertical lines
+            // line(x, border, x, height - border);
+            //shows horizontal lines
+            line(border, x, width - border, x);
+            fill(255,255,255);
+            // shows text on top of the screen (veritical)
+            // text(i,x,border*0.5f);
+            //shows text on the side of the screen (horizontal)
+            text(i, border * 0.5f, x);
+
+        }//end for loop
+        stroke(126);
+        line(30,20,85,20);
+    }//end method
 
     public void settings() {
         size(500, 500);         
@@ -103,13 +123,15 @@ public class Arrays extends PApplet {
         // draw a bar chart of the rainfall
         //using the map function
         colorMode(HSB);
-        float w = width / (float) rainFall.length;
+        float w = width / (float) rainFall.length ;
         for(int i = 0; i < rainFall.length ; i++){
 
             noStroke();
             fill(random(255), 255,255);
             float x = map(i, 0, rainFall.length, 0, width);
             rect(x,height,w , - rainFall[i]);
+            // ellipse(x, height, w, - rainFall[i]);
+            
         }
     }
 
@@ -117,9 +139,10 @@ public class Arrays extends PApplet {
 
     public void draw() {
         // background(0);
-        //drawGrid();\ colorMode(RGB);
+        // drawGrid();
         colorMode(HSB);
         float c = map(mouseX, 0, width, 0, 255);
         // background(c,255,255);
+        drawLines();
     }
 }
