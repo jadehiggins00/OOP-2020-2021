@@ -139,10 +139,10 @@ public class Arrays extends PApplet {
 
     public void draw() {
         // background(0);
-        // drawGrid();
+        drawGrid();
         colorMode(HSB);
         float c = map(mouseX, 0, width, 0, 255);
         // background(c,255,255);
-        drawLines();
+        // drawLines();
     }
 }
