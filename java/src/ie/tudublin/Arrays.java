@@ -15,7 +15,7 @@ public class Arrays extends PApplet {
 
     // This is a demo of the map function
     public void drawGrid() {
-        stroke(0, 255, 0);
+        stroke(255, 255, 255);
         float border = width * 0.1f;
         textAlign(CENTER, CENTER);
         for (int i = -5; i <= 5; i++) {
@@ -30,9 +30,59 @@ public class Arrays extends PApplet {
 
     // creating a method to display a bar chary
     public void barChart(){
-        stroke(0,255,0);
-        
+        //color of the lines
+        stroke(255,255,255);
+        float border = width * 0.1f;
+        textAlign(CENTER,CENTER);
+        for(int i=0 ; i <= 120; i+=10){
+            float x = map(i, 120, 0, border, width - border);
+            fill(255,255,255);
+            // numbers along the side of the bar chart - VERTICAL AXIS
+            text(i,border * 0.5f, x);
 
+        }
+
+        //drawing the bars
+        // colorMode(HSB);
+        // float w = width / (float) rainfall.length;
+        // for (int i = 0; i < rainfall.length; i++) {
+        //     noStroke();
+        //     fill(random(255), 255, 255);
+        //     float x = map(i, 0, rainfall.length, 0, width);
+        //     rect(x, height, w, -rainfall[i]);
+        // }
+                   //inner for loop to display the bars of the chart
+                   colorMode(HSB);
+                   float w = width / (float) rainfall.length;
+                   for(int i=0; i< rainfall.length; i++){
+
+                    fill(255,255,255);
+                    float z = map(i, rainfall.length,0, w, w - border );
+                    // float z = map(i, 0, rainfall.length, 0, width);
+                    rect(border,z,w, -rainfall[i]);
+                    // rect(z, border,w, -rainfall[i]);
+                
+    
+    
+                }//end inner for
+        
+        //drawing the x and y axis of the two lines
+        for(int j=0; j <= 0; j++){
+            // horizontal axis
+            float x = map(j, 1, 0, border, width - border);
+            line(border,x,width  - border, x);
+            //draw the vertical axis
+            float y = map(j, 0, 1, border, width - border);
+            line(y, border,y , height - border);
+        }//end for loop
+
+
+        for(int k = 0 ; k < months.length; k++){
+            float x = map(k,  months.length, 0,border,width - border);
+            fill(255,255,255);
+            // display months of the year horizonatally
+            text(months[k],x, border * 0.5f);
+        }
 
     }//end method
     
@@ -66,7 +116,7 @@ public class Arrays extends PApplet {
     int mode = 0;
 
     float[] rainfall = { 45, 37, 55, 27, 38, 50, 79, 48, 104, 31, 100, 58 };
-    String[] months = { "Jan", "Feb", "March", "April", "May", "June", "July", "August", "Sept", "Oct", "Nov", "Dec" };
+    String[] months = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
     float[] arr = new float[100]; // 100 float array
 
     public void keyPressed() {
@@ -134,8 +184,10 @@ public class Arrays extends PApplet {
         switch (mode) {
             case 0: {
                 // Bar chart
+                barChart();
                 break;
             }
+            
             case 1: {
                 // Trend line
             }
