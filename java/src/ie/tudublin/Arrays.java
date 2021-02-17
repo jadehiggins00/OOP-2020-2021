@@ -30,6 +30,7 @@ public class Arrays extends PApplet {
 
     // creating a method to display a bar chary
     public void barChart(){
+
         //color of the lines
         stroke(255,255,255);
         float border = width * 0.1f;
@@ -40,48 +41,35 @@ public class Arrays extends PApplet {
             // numbers along the side of the bar chart - VERTICAL AXIS
             text(i,border * 0.5f, x);
 
-        }
+        }//end for loop
 
-        //drawing the bars
-        // colorMode(HSB);
-        // float w = width / (float) rainfall.length;
-        // for (int i = 0; i < rainfall.length; i++) {
-        //     noStroke();
-        //     fill(random(255), 255, 255);
-        //     float x = map(i, 0, rainfall.length, 0, width);
-        //     rect(x, height, w, -rainfall[i]);
-        // }
-                   //inner for loop to display the bars of the chart
-                   colorMode(HSB);
-                   float w = width / (float) rainfall.length;
-                   for(int i=0; i< rainfall.length; i++){
-
-                    fill(255,255,255);
-                    float z = map(i, rainfall.length,0, w, w - border );
-                    // float z = map(i, 0, rainfall.length, 0, width);
-                    rect(border,z,w, -rainfall[i]);
-                    // rect(z, border,w, -rainfall[i]);
-                
-    
-    
-                }//end inner for
-        
         //drawing the x and y axis of the two lines
         for(int j=0; j <= 0; j++){
-            // horizontal axis
+            //vertical axis
             float x = map(j, 1, 0, border, width - border);
             line(border,x,width  - border, x);
-            //draw the vertical axis
+            //draw the horizontal axis
             float y = map(j, 0, 1, border, width - border);
             line(y, border,y , height - border);
         }//end for loop
 
+        
+        //drawing the bars
+        colorMode(HSB);
+        float w = width / (float) rainfall.length ;
+        for (int i = 0; i < rainfall.length; i++) {
+            
+            fill(random(255), 255, 255);
+            float x = map(i, 0, rainfall.length, border, width - border );
+            rect(x , height - border , w , -rainfall[i] );
+        }//end for loop
 
+        // display the months of the year
         for(int k = 0 ; k < months.length; k++){
-            float x = map(k,  months.length, 0,border,width - border);
+            float x = map(k, 0, months.length, border,width - border);
             fill(255,255,255);
             // display months of the year horizonatally
-            text(months[k],x, border * 0.5f);
+            text(months[k],x, height -border * 0.5f);
         }
 
     }//end method
