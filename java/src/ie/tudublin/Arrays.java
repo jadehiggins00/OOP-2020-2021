@@ -27,6 +27,14 @@ public class Arrays extends PApplet {
             text(i, border * 0.5f, x);
         }
     }
+
+    // creating a method to display a bar chary
+    public void barChart(){
+        stroke(0,255,0);
+        
+
+
+    }//end method
     
     // Return the sum of all the elements in an array
     float sum(float[] array) {
@@ -133,6 +141,7 @@ public class Arrays extends PApplet {
             }
             case 2: {
                 // Pie chart
+                
             }
         }
     }
