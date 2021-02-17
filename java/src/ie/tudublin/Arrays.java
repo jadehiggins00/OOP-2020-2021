@@ -58,10 +58,10 @@ public class Arrays extends PApplet {
         colorMode(HSB);
         float w = width / (float) rainfall.length ;
         for (int i = 0; i < rainfall.length; i++) {
-            
+      
             fill(random(255), 255, 255);
             float x = map(i, 0, rainfall.length, border, width - border );
-            rect(x , height - border , w , -rainfall[i] );
+            rect(x , height - border  , w , -rainfall[i] );
         }//end for loop
 
         // display the months of the year
