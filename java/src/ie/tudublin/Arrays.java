@@ -180,6 +180,7 @@ public class Arrays extends PApplet {
                 line(border, border, border, height - border);
                 line(border, height - border, width - border, height - border);
                 textAlign(CENTER,CENTER); 
+                // adding the line indents and text along the Y axis
                 for(float f = 0 ; f <= 120 ; f+=10){
                     // for y axis
                     float y = map(f, 0, 120, height - border, border);
@@ -204,14 +205,50 @@ public class Arrays extends PApplet {
                     text(months[i], x + (w * 0.5f),height - (border * 0.5f));
 
                 }//end for loop
+                // for top text 
                 text("Rainfall Chart", width * 0.5f, border * 0.5f);
                 
-                break;
-            }
-            
+                
+            }//end case 0
+            break;
             case 1: {
                 // Trend line
-            }
+                float border = width * 0.1f;
+                stroke(255);
+                // vertical line Y AXIS
+                line(border,border,border,height - border); 
+                // horizontal line X AXIS
+                line(border, height - border, width - border, height - border);
+                for(int f=0; f <= 120 ; f+=10){
+
+                    float y = map(f,0,120, height - border,border);
+                    line(border - 5, y, border, y);
+                    text((int) f, border * 0.5f, y);
+
+                }//end for loop
+
+                float w = (width - border * 2) / (float) rainfall.length;
+                // displaying the months on the X AXIS
+                for( int i =0; i< rainfall.length; i ++ ) {
+                    float x1 = map(i - 1, 0, rainfall.length - 1, border + (w * 0.5f), width - border - (w * 0.5f));
+                    fill(255);
+                    text(months[i], x1, height - border * 0.5f);
+
+                }
+
+
+                for(int i = 1 ; i < rainfall.length ; i++){
+                    // to display months
+                    stroke(255);
+                    float x1 = map(i - 1, 0, rainfall.length - 1, border + (w * 0.5f), width - border - (w * 0.5f));
+                    float y1 = map(rainfall[i-1] ,0, 120, height - border, border);
+                    float x2 = map(i, 0, rainfall.length - 1, border + (w * 0.5f), width - border - (w * 0.5f));
+                    float y2 = map(rainfall[i] ,0, 120, height - border, border); 
+                    line(x1, y1, x2, y2);
+                }
+
+            }//end case 1
+            break;
             case 2: {
                 // Pie chart
                 
