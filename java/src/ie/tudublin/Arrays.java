@@ -172,7 +172,40 @@ public class Arrays extends PApplet {
         switch (mode) {
             case 0: {
                 // Bar chart
-                barChart();
+                stroke(255); 
+                //colormode
+                colorMode(HSB);
+                // two lines
+                float border = width * 0.1f;
+                line(border, border, border, height - border);
+                line(border, height - border, width - border, height - border);
+                textAlign(CENTER,CENTER); 
+                for(float f = 0 ; f <= 120 ; f+=10){
+                    // for y axis
+                    float y = map(f, 0, 120, height - border, border);
+                    line(border -5, y, border, y);
+                    fill(255);
+                    text((int) f, border * 0.5f,y);
+
+                }//end for loop
+
+                //print the bar
+                //width of bars
+                float w = (width - border * 2) / (float) rainfall.length;
+                for (int i=0; i < rainfall.length; i++){
+                    // map onto border and width - border
+                    float x = map(i, 0, rainfall.length, border, width - border);
+                    // for colors
+                    float c = map(i, 0, rainfall.length,0,255);
+                    fill(c,255,255);
+                    float h = map(rainfall[i], 0, 120,0, -(height - (border * 2)));
+                    rect(x, height - border - 1, w, h);
+                    fill(255);
+                    text(months[i], x + (w * 0.5f),height - (border * 0.5f));
+
+                }//end for loop
+                text("Rainfall Chart", width * 0.5f, border * 0.5f);
+                
                 break;
             }
             
