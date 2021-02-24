@@ -70,7 +70,7 @@ public class Life extends PApplet {
 
     public void setCell(boolean[][] board, int row, int col, boolean b)
     {
-        if (row >= 0 && row < size -1 && col >= 0 && col < size -1)
+        if (row >= 0 && row < size && col >= 0 && col < size -1)
         {
             board[row][col] = b;
         }
@@ -78,7 +78,7 @@ public class Life extends PApplet {
 
     public boolean getCell(boolean[][] board, int row, int col)
     {
-        if (row >= 0 && row < size -1 && col >= 0 && col < size -1)
+        if (row >= 0 && row < size  && col >= 0 && col < size -1)
         {
             return board[row][col];
         }
@@ -206,40 +206,47 @@ public class Life extends PApplet {
                     else {
 
                         board[row][col] = false;
-                        if(getCell(board, row, col) == dead){
+                        // if(getCell(board, row, col) == dead){
 
-                            if(countNeighbours(row,col) == 3){
-                                board[row][col] = alive;
-                            }
+                        //     if(countNeighbours(row,col) == 3){
+                        //         board[row][col] = alive;
+                        //     }
 
-                            else {
-                                board[row][col] = dead;
-                            }
-                        }
+                        //     else {
+                        //         board[row][col] = dead;
+                        //     }
+                        // }
                         
                     }//end else
                 }//end if
 
-                // else if(getCell(board, row, col) == dead){
+                //  else if(getCell(board, row, col) == dead){
 
-                //     if( countNeighbours(row, col) ==3 ) {
-                //         board[row][col] = alive;
+                //      if( countNeighbours(row, col) == 3 ) {
+                //          board[row][col] = alive;
                 //     }//endif
 
                 //     else {
-                //         board[row][col] = dead;
-                //     }//end else
-                // }//end else if
+                //          board[row][col] = dead;
+                //    }//end else
+                //  }//end else if
                 
 
             }//end inner for loop
 
+         
+
+
+            
         }//end outer for loop
+
+
         
         // Swap board and next
         boolean[][] temp = board;
         board = next;
         next = temp;
+       
 
     }//end method
 
