@@ -22,11 +22,12 @@ public class Life extends PApplet {
                     if (getCell(board, r, c))
                     {
                         count ++;
+                        
                     }
                 }
             }
         }
-
+        
         // OR Use 8 if statements
         /*
         if (getCell(board, row-1, col-1))
@@ -64,6 +65,7 @@ public class Life extends PApplet {
         */
         
         return count;
+        
     }
 
     public void setCell(boolean[][] board, int row, int col, boolean b)
@@ -182,16 +184,64 @@ public class Life extends PApplet {
         //printBoard(board);        
     }
 
-    private void updateBoard()
-    {
+    private void updateBoard(boolean[][] board)
+    {   
+        boolean alive = true;
+        boolean dead = false;
         // Put code here to apply the rules!!
+        for (int row = 0; row < size; row++){
 
+     
+            for( int col = 0 ; col < size; col++){
+                // if the cell is alive
+                if(getCell(board, row, col) == alive){
+
+                    // if the cell has exactly 2 or 3 neighbours it is set to true
+                    if (  countNeighbours(row, col) == 2 || countNeighbours(row, col) == 3 ) {
+                        board[row][col] = true;
+                       
+
+                    }//end if 
+                    // otherwise the cell dies and is set to false
+                    else {
+
+                        board[row][col] = false;
+                        if(getCell(board, row, col) == dead){
+
+                            if(countNeighbours(row,col) == 3){
+                                board[row][col] = alive;
+                            }
+
+                            else {
+                                board[row][col] = dead;
+                            }
+                        }
+                        
+                    }//end else
+                }//end if
+
+                // else if(getCell(board, row, col) == dead){
+
+                //     if( countNeighbours(row, col) ==3 ) {
+                //         board[row][col] = alive;
+                //     }//endif
+
+                //     else {
+                //         board[row][col] = dead;
+                //     }//end else
+                // }//end else if
+                
+
+            }//end inner for loop
+
+        }//end outer for loop
         
         // Swap board and next
         boolean[][] temp = board;
         board = next;
         next = temp;
-    }
+
+    }//end method
 
     public void mouseDragged()
     {
@@ -201,6 +251,6 @@ public class Life extends PApplet {
     public void draw() {
         background(0);
         drawBoard(board);        
-        updateBoard();
+        updateBoard(board);
     }
 }
