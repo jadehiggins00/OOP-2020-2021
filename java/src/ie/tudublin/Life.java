@@ -6,8 +6,22 @@ public class Life extends PApplet {
 
     int size = 100;
     float cellSize;
-    boolean[][] board = new boolean[size][size];
-    boolean[][] next = new boolean[size][size];
+    float[][] board = new float[size][size];
+    float[][] next = new float[size][size];
+
+    // creating  amthod to clear the board(erase it)
+    public void clear(){
+
+        for(int row = 0; row <  size ; row ++) {
+        
+            for(int col=0 ; col < size + 1; col ++){
+                //setting every cell to be false - clearing all cells on board
+                setCell(board, row, col, 0);
+            }//end inner for
+        }//end outer for
+
+
+    }//end method
 
     public int countNeighbours(int row, int col)
     {
@@ -19,7 +33,7 @@ public class Life extends PApplet {
             {
                 if (! (r == row && c == col))
                 {
-                    if (getCell(board, r, c))
+                    if (getCell(board, r, c) >0)
                     {
                         count ++;
                         
@@ -67,28 +81,28 @@ public class Life extends PApplet {
         return count;
         
     }
-
-    public void setCell(boolean[][] board, int row, int col, boolean b)
+    //bounds checking
+    public void setCell(float[][] board, int row, int col, float b)
     {
-        if (row >= 0 && row < size && col >= 0 && col < size -1)
+        if (row >= 0 && row < size && col >= 0 && col < size )
         {
             board[row][col] = b;
         }
     }
 
-    public boolean getCell(boolean[][] board, int row, int col)
+    public float getCell(float[][] board, int row, int col)
     {
-        if (row >= 0 && row < size  && col >= 0 && col < size -1)
+        if (row >= 0 && row < size && col >= 0 && col < size )
         {
             return board[row][col];
         }
         else
         {
-            return false;
+            return 0;
         }        
     }
 
-    public void drawBoard(boolean[][] board)
+    public void drawBoard(float[][] board)
     {
         // Use a nested loop
         // Use map to calculate x and y
@@ -101,8 +115,12 @@ public class Life extends PApplet {
             {
                 float x = map(col, 0, size, 0, width);
                 float y = map(row, 0, size, 0, height);
-                if (board[row][col])
+                float c = getCell(board, row, col);
+                //if cell value is greater than 0 it means its alive
+                if (c > 0)
                 {
+                    noStroke();
+                    fill(c, 255,255);
                     rect(x, y, cellSize, cellSize);
                 }
             }
@@ -139,7 +157,8 @@ public class Life extends PApplet {
                     board[row][col] = false;
                 }
                 */
-                board[row][col] = (dice < 0.5f) ? true : false;
+                //setting to random value or 0
+                board[row][col] = (dice < 0.5f) ? random(255) : 0;
             }
         }
     }
@@ -154,22 +173,51 @@ public class Life extends PApplet {
     public void keyPressed() {
         if (keyCode == ' ')
         {
+            //pausing cell board - flips flag between true and false
+            paused = ! paused;
         }
         
         if (keyCode == '1')
         {
+            //calling the function randomize to randomize the board
+            randomize();
         }
         if (keyCode == '2')
         {
+            clear();
         }
         if (keyCode == '3')
         {
+            drawCross();
         }
             
     }
 
+    // drawing the cross shape 
+    public void drawCross(){
+        for(int i=0; i< size ;  i++){
+            //size/2 means halfway up the board
+            setCell(board, size/2, i, random(255)); // rows
+            setCell(board, i, size/2, random(255));
+        }//end for
+
+    }//end method
+
+    // finding the average colour
+    public float averageAround(float[][] board, int row, int col){
+        float sum =0;
+        for (int r = row-1; r <= row+1; r++ ){
+            for (int c = col-1; c <= col+1; c++ ){
+                
+                sum += getCell(board, r, c);
+            }//end iiner for
+        }
+        return sum /3.0f;
+    }
+
+
     public void setup() {
-        colorMode(RGB);
+        colorMode(HSB);
         randomize();
         
         /*
@@ -180,106 +228,79 @@ public class Life extends PApplet {
         println(countNeighbours(0, 2));
 
         cellSize = width / (size);
+
+        //changing the framerate
+        frameRate(10);
         
         //printBoard(board);        
     }
 
-    private void updateBoard(boolean[][] board)
+    private void updateBoard()
     {   
-        boolean alive = true;
-        boolean dead = false;
-
-   
-
-
+      
         // Put code here to apply the rules!!
-        for (int row = 0; row < size -1; row++){
+        for (int row = 0; row < size ; row++){
 
-     
-            for( int col = 0 ; col < size -1; col++){
+            for( int col = 0 ; col < size ; col++){
+            //putting the countNeighbour functon into a count var
+            int count = countNeighbours(row, col);
+
                 // if the cell is alive
-                // if(getCell(board, row, col) == alive){
+                if(getCell(board, row, col)>0){
 
-                //     // if the cell has exactly 2 or 3 neighbours it is set to true
-                //     if (  countNeighbours(row, col) == 2 || countNeighbours(row, col) == 3 ) {
-                //         board[row][col] = true;
+                    // if the cell has exactly 2 or 3 neighbours it is set to true
+                    if(  count == 2 || count == 3 ) {
+                        setCell(next, row, col, random(255)); //random 255 for colours
                        
 
-                //     }//end if 
-                //     // otherwise the cell dies and is set to false
-                //     else {
-
-                //         board[row][col] = false;
-                //         // if(getCell(board, row, col) == dead){
-
-                //         //     if(countNeighbours(row,col) == 3){
-                //         //         board[row][col] = alive;
-                //         //     }
-
-                //         //     else {
-                //         //         board[row][col] = dead;
-                //         //     }
-                //         // }
-                        
-                //     }//end else
-                // }//end if
-
-                //  else if(getCell(board, row, col) == dead){
-
-                //      if( countNeighbours(row, col) == 3 ) {
-                //          board[row][col] = alive;
-                //     }//endif
-
-                //     else {
-                //          board[row][col] = dead;
-                //    }//end else
-                //  }//end else if
-                
-                // if it is alive and has less than 2 live neighbours, it dies from loneliness
-                if( (board[row][col] == alive) && (countNeighbours(row, col) < 2)){
-                    next[row][col] = dead;
+                    }//end if 
+                    // otherwise the cell dies and is set to false
+                    else {
+                        setCell(next, row, col, 0);
+            
+                    }//end else
                 }//end if
 
-                // if it is alive and has more than 3 live neighbours, it dies from overpopulation
-                else if( (board[row][col] == alive) && (countNeighbours(row, col) > 3)){
-                    next[row][col] = dead;
-                }//end else if
-
-                //if it is dead and has exactly 3 live neighbours, it is born
-                else if ((board[row][col] == dead)&& (countNeighbours(row, col) == 3)){
-                    next[row][col] = alive;
-                }
-
+                //  if there are exatcly three neighbours a cell is born 
                 else {
 
-                    next[row][col] = board[row][col];
-                }
-            }//end inner for loop
+                     if( count == 3 ) {
+                        setCell(next, row, col, averageAround(board,row, col));
+                    }//endif
 
-         
+                    // otherwise it dies
+                    else {
+                        setCell(next, row, col, 0);
+                   }//end else
+                 }//end else
+                
 
-
-            
+             }//end inner for loop
         }//end outer for loop
 
-
-        
         // Swap board and next
-        boolean[][] temp = board;
+        float[][] temp = board;
         board = next;
         next = temp;
        
-
     }//end method
 
+    //called by superclass
     public void mouseDragged()
     {
         // This method gets called automatically when the mouse is dragged across the screen
+        int row = (int)map(mouseY, 0, height,0, size); // y axis
+        int col = (int)map(mouseX, 0, width, 0, size);
+        // calling set cell to implement row and col
+        setCell(board, row, col, random(255));
     }
 
     public void draw() {
         background(0);
-        drawBoard(board);        
-        updateBoard(board);
+        drawBoard(board);  
+        if(!paused){
+            updateBoard();
+        }      
+       
     }
 }
