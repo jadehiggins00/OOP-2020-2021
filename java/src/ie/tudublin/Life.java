@@ -6,8 +6,19 @@ public class Life extends PApplet {
 
     int size = 100;
     float cellSize;
-    boolean[][] board = new boolean[size][size];
+    float[][] board = new float[size][size];
     boolean[][] next = new boolean[size][size];
+
+    // public void clear(){
+
+    // for(int row = 0 ; row < size ; row ++){
+
+    //     for(int col =0 ; col <size ;col ++){
+
+    //       pass
+
+    //     }//end inner loop
+    // }///end methof
 
     public int countNeighbours(int row, int col)
     {
@@ -66,27 +77,27 @@ public class Life extends PApplet {
         return count;
     }
 
-    public void setCell(boolean[][] board, int row, int col, boolean b)
+    public void setCell(float[][] board, int row, int col, float b)
     {
-        if (row >= 0 && row < size -1 && col >= 0 && col < size -1)
+        if (row >= 0 && row < size  && col >= 0 && col < size -1)
         {
             board[row][col] = b;
         }
     }
 
-    public boolean getCell(boolean[][] board, int row, int col)
+    public boolean getCell(float[][] board, int row, int col)
     {
-        if (row >= 0 && row < size -1 && col >= 0 && col < size -1)
+        if (row >= 0 && row < size  && col >= 0 && col < size -1)
         {
             return board[row][col];
         }
         else
         {
-            return false;
+            return 0;
         }        
     }
 
-    public void drawBoard(boolean[][] board)
+    public void drawBoard(float[][] board)
     {
         // Use a nested loop
         // Use map to calculate x and y
@@ -152,18 +163,33 @@ public class Life extends PApplet {
     public void keyPressed() {
         if (keyCode == ' ')
         {
+            // paused != paused;
         }
         
         if (keyCode == '1')
         {
+            randomize();
         }
         if (keyCode == '2')
         {
+            clear();
         }
         if (keyCode == '3')
         {
+            drawCross();
         }
-            
+        
+           
+        frameRate(20);
+    }
+
+    public void drawCross(){
+
+        for (int i = 0 ; i < size; i ++){
+
+            setCell(board, size/2, i, true);
+            setCell(board, i, size/2, true);
+        }
     }
 
     public void setup() {
@@ -185,7 +211,25 @@ public class Life extends PApplet {
     private void updateBoard()
     {
         // Put code here to apply the rules!!
+        for(int row = 0 ; row < size ; row ++){
 
+            for(int col =0 ; col <size ;col ++){
+
+                int count = countNeighbours(row, col);
+                if(getCell(board, row, col)){
+
+                    if(count == 2 ||  count ==3){
+                        setCell(next, row, col, true);
+                    }
+
+                    else{
+
+                        setCell(board, row, col, false);
+                    }
+                }//end if
+
+            }//end inner loop
+        }
         
         // Swap board and next
         boolean[][] temp = board;
@@ -196,6 +240,9 @@ public class Life extends PApplet {
     public void mouseDragged()
     {
         // This method gets called automatically when the mouse is dragged across the screen
+        int row = (int)map(mouseY, 0, height, 0, size);
+        int col = (int)map(mouseX, 0, width, 0, size);
+        setCell(board, row, col, true);
     }
 
     public void draw() {
