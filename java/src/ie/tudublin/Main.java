@@ -73,9 +73,14 @@ public class Main
         String[] a = {"MAIN"};
         processing.core.PApplet.runSketch( a, new RandomWalker());
     }
+    public void randomNumber()
+    {
+        String[] a = {"MAIN"};
+        processing.core.PApplet.runSketch( a, new RandomNumber());
+    }
     public static void main(String[] args)
     {
         Main main = new Main();
-        main.randomWalker();
+        main.randomNumber();
     }
 } 
