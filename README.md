@@ -39,6 +39,20 @@ Resources
 - https://github.com/skooter500/OOP_Labtest1_2017_Starter
 - https://github.com/skooter500/OOP-LabTest1-2016
 
+# Week 7 - Audio
+- [Minim library reference](http://code.compartmental.net/minim/)
+- [Video of the class](https://web.microsoftstream.com/video/530ea615-e38c-4c13-819d-d2b39a90519e?list=studio)
+- [lerp](https://processing.org/reference/lerp_.html)
+- [Audio1.java](java/src/ie/tudublin/Audio1.java)
+
+Some audio responsive stuff I have been working on recently:
+
+[![YouTube](http://img.youtube.com/vi/4Fc_OW4M5AU/0.jpg)](https://www.youtube.com/watch?v=4Fc_OW4M5AU)
+
+[![YouTube](http://img.youtube.com/vi/xF7VrXZqLko/0.jpg)](https://www.youtube.com/watch?v=xF7VrXZqLko)
+
+[![YouTube](http://img.youtube.com/vi/KNymjRyr27A/0.jpg)](https://www.youtube.com/watch?v=KNymjRyr27A)
+
 # Week 6 - Star Map ArrayList, classes, CSV files
 
 ##  Lab
