@@ -35,7 +35,7 @@ public class Audio1 extends PApplet {
         //stereo -two channel, MONO - one channel, second arg - frame size, arg3 - sample rate, arg4 - size of every sample in bits
         ai = minim.getLineIn(Minim.MONO, width, 44100, 16); 
         // load an mp3 file
-        ap = minim.loadFile("pin.mp3", width); // second parameter is framesize
+        ap = minim.loadFile("heroplanet.mp3", width); // second parameter is framesize
         // this will start streaming the mp3
         ap.play();
         //asign audio buffer from the microphone
