@@ -55,7 +55,7 @@ public class Audio1 extends PApplet {
     public void draw() {
         background(0);
         stroke(255);
-        float halfHeight = height / 2;
+        float halfHeight = height /2;
         float average = 0;
         float sum = 0;
 
@@ -95,14 +95,63 @@ public class Audio1 extends PApplet {
             }   
             case 1:
             {
+                
+                 // Iterate over all the elements in the audio buffer
+                 for (int i = 0; i < ab.size(); i++) {
+
+                    float c = map(i, 0, ab.size(), 0, 255);
+                    stroke(c, 255, 255);
+                    lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);
+        
+                    line(i, halfHeight - lerpedBuffer[i] * halfHeight * 4,i, halfHeight + lerpedBuffer[i] * halfHeight * 4);
+                    
+                }
                 break;
             }
             case 2:
             {
+                float border = 0.1f * width;
+
+                 // Iterate over all the elements in the audio buffer
+                 for (int i = 0; i < ab.size(); i++) {
+
+                    float c = map(i, 0, ab.size(), 0, 255);
+                    stroke(c, 255, 255);
+                    lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);
+        
+                    // bottom wave form
+                    line(i, width - lerpedBuffer[i] * width * 4,i, width + lerpedBuffer[i] * width * 4);
+                    // right wave form
+                    line(width - lerpedBuffer[i] * width * 4, i, width + lerpedBuffer[i] * width * 4, i);
+
+                    // line(i,height - lerpedBuffer[i] * height * 4, height + lerpedBuffer[i] * height * 4, i); // this looks cool also
+
+                    line(width - lerpedBuffer[i] * width * 4, i, width + lerpedBuffer[i] * width * 4, i);
+                    
+                      
+                    line(i, width  - lerpedBuffer[i] * width * 4,i , width  - lerpedBuffer[i] * width * 4);
+
+                    // line(border, border, border, height - border);
+                    // line(border, height - border, width - border, height - border);
+                    
+                }
+                
                 break;
             }
             case 3:
             {
+                for (int i = 0; i < ab.size(); i++) {
+                    stroke(66, 135, 245);
+                    strokeWeight(3);
+                    fill(0);
+                    lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);
+                    ellipse(width / 2, 200, 50 + (lerpedAverage * 500), 50 + (lerpedAverage * 500));
+
+                    ellipse(200, y, 30, 30);
+                    ellipse(300, lerpedY, 30, 30);
+                    y += random(-10, 10);
+                    lerpedY = lerp(lerpedY, y, 0.1f);
+                }
                 break;
             }
             case 4:
@@ -111,6 +160,18 @@ public class Audio1 extends PApplet {
             }
             case 5:
             {
+                float height = width /2;
+                  // Iterate over all the elements in the audio buffer
+                  for (int i = 0; i < ab.size(); i++) {
+
+                    float c = map(i, 0, ab.size(), 0, 255);
+                    stroke(c, 255, 255);
+                    lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);
+        
+                     line(height - lerpedBuffer[i] * height * 4, height + lerpedBuffer[i] * height * 4, i,i); // this looks cool
+                    
+                }
+               
                 // ??
                 break;
             }
