@@ -28,7 +28,7 @@ public class Audio1 extends PApplet {
     public void setup() {
         minim = new Minim(this);
         ai = minim.getLineIn(Minim.MONO, width, 44100, 16);
-        ap = minim.loadFile("heroplanet.mp3", width);
+        ap = minim.loadFile("thestoryofus.mp3", width);
         //ab = ai.mix; // Connect the buffer to the mic
         ab = ap.mix; // Connect the buffer to the mp3 file
         colorMode(HSB);
@@ -83,14 +83,14 @@ public class Audio1 extends PApplet {
                 }
 
                 // See the difference lerping makes? It smooths out the jitteryness of average, so the visual looks smoother
-                ellipse(width / 4, 100, average * 500, average * 500);
-                ellipse(width / 2, 100, 50 + (lerpedAverage * 500), 50 + (lerpedAverage * 500));
+                // ellipse(width / 4, 100, average * 500, average * 500);
+                // ellipse(width / 2, 100, 50 + (lerpedAverage * 500), 50 + (lerpedAverage * 500));
         
-                // This is another example of how lerping works
-                ellipse(200, y, 30, 30);
-                ellipse(300, lerpedY, 30, 30);
-                y += random(-10, 10);
-                lerpedY = lerp(lerpedY, y, 0.1f);
+                // // This is another example of how lerping works
+                // ellipse(200, y, 30, 30);
+                // ellipse(300, lerpedY, 30, 30);
+                // y += random(-10, 10);
+                // lerpedY = lerp(lerpedY, y, 0.1f);
                 break;
             }   
             case 1:
@@ -141,21 +141,27 @@ public class Audio1 extends PApplet {
             case 3:
             {
                 for (int i = 0; i < ab.size(); i++) {
-                    stroke(66, 135, 245);
-                    strokeWeight(3);
+                    stroke(255);
+                    
                     fill(0);
                     lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);
-                    ellipse(width / 2, 200, 50 + (lerpedAverage * 500), 50 + (lerpedAverage * 500));
+                    ellipse(width / 2, 250, 100 + (lerpedAverage * 1000), 100 + (lerpedAverage * 1000));
+                    
 
-                    ellipse(200, y, 30, 30);
-                    ellipse(300, lerpedY, 30, 30);
-                    y += random(-10, 10);
-                    lerpedY = lerp(lerpedY, y, 0.1f);
+                    // ellipse(200, y, 30, 30);
+                    // ellipse(300, lerpedY, 30, 30);
+                    // y += random(-10, 10);
+                    // lerpedY = lerp(lerpedY, y, 0.1f);
                 }
                 break;
             }
             case 4:
             {
+
+                for(int i=0; i< ab.size();i++){
+
+                    
+                }
                 break;
             }
             case 5:
@@ -168,7 +174,7 @@ public class Audio1 extends PApplet {
                     stroke(c, 255, 255);
                     lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);
         
-                     line(height - lerpedBuffer[i] * height * 4, height + lerpedBuffer[i] * height * 4, i,i); // this looks cool
+                    line(height - lerpedBuffer[i] * height * 4, height + lerpedBuffer[i] * height * 4, i,i); // this looks cool
                     
                 }
                
