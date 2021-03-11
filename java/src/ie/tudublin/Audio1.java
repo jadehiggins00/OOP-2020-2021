@@ -17,7 +17,7 @@ public class Audio1 extends PApplet {
 
     public void settings() {
         size(512, 512);
-        // fullScreen(P3D, SPAN); // Try this for full screen multiple monitor support :-) Be careful of exceptions!
+        fullScreen(P3D, SPAN); // Try this for full screen multiple monitor support :-) Be careful of exceptions!
     }
 
     float y = 200;
@@ -27,7 +27,7 @@ public class Audio1 extends PApplet {
 
     public void setup() {
         minim = new Minim(this);
-        ai = minim.getLineIn(Minim.MONO, width, 44100, 16);
+        ai = minim.getLineIn(Minim.MONO, width, 44100,   16);
         ap = minim.loadFile("thestoryofus.mp3", width);
         //ab = ai.mix; // Connect the buffer to the mic
         ab = ap.mix; // Connect the buffer to the mp3 file
@@ -101,6 +101,7 @@ public class Audio1 extends PApplet {
 
                     float c = map(i, 0, ab.size(), 0, 255);
                     stroke(c, 255, 255);
+                    // lerp smooths the movement
                     lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);
         
                     line(i, halfHeight - lerpedBuffer[i] * halfHeight * 4,i, halfHeight + lerpedBuffer[i] * halfHeight * 4);
@@ -123,16 +124,15 @@ public class Audio1 extends PApplet {
                     line(i, width - lerpedBuffer[i] * width * 4,i, width + lerpedBuffer[i] * width * 4);
                     // right wave form
                     line(width - lerpedBuffer[i] * width * 4, i, width + lerpedBuffer[i] * width * 4, i);
+                    //left
+                    line(0, i, lerpedBuffer[i] * halfHeight* 4, i);
+                    //right
+                    line(i, 0,i, lerpedBuffer[i] * halfHeight* 4);
+
 
                     // line(i,height - lerpedBuffer[i] * height * 4, height + lerpedBuffer[i] * height * 4, i); // this looks cool also
 
-                    line(width - lerpedBuffer[i] * width * 4, i, width + lerpedBuffer[i] * width * 4, i);
                     
-                      
-                    line(i, width  - lerpedBuffer[i] * width * 4,i , width  - lerpedBuffer[i] * width * 4);
-
-                    // line(border, border, border, height - border);
-                    // line(border, height - border, width - border, height - border);
                     
                 }
                 
@@ -140,42 +140,80 @@ public class Audio1 extends PApplet {
             }
             case 3:
             {
-                for (int i = 0; i < ab.size(); i++) {
-                    stroke(255);
+                
+                    //amplitutde
+                    float c = map(average, 0, 1, 0, 255);
+                    stroke(c,255,255);
+                    strokeWeight(2);
+                    noFill();
                     
-                    fill(0);
-                    lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);
-                    ellipse(width / 2, 250, 100 + (lerpedAverage * 1000), 100 + (lerpedAverage * 1000));
+                    ellipse(width / 2, 100, 50 + (lerpedAverage * 500), 100 + (lerpedAverage * 500));
                     
 
                     // ellipse(200, y, 30, 30);
                     // ellipse(300, lerpedY, 30, 30);
                     // y += random(-10, 10);
                     // lerpedY = lerp(lerpedY, y, 0.1f);
-                }
+                
                 break;
             }
             case 4:
             {
 
-                for(int i=0; i< ab.size();i++){
-
+                
+                    //amplitutde
+                    float c = map(average, 0, ab.size(), 0, 255);
+                    stroke(c,255,255);
+                    strokeWeight(2);
+                    noFill();
+                    rectMode(CENTER);
+                    float size = 50 + (lerpedAverage * 500);
+                    rect(width/2, height/2, size, size);
                     
-                }
+
+                    // ellipse(200, y, 30, 30);
+                    // ellipse(300, lerpedY, 30, 30);
+                    // y += random(-10, 10);
+                    // lerpedY = lerp(lerpedY, y, 0.1f);
+                
                 break;
+
+                
+                
             }
             case 5:
             {
-                float height = width /2;
-                  // Iterate over all the elements in the audio buffer
-                  for (int i = 0; i < ab.size(); i++) {
+                // float height = width /2;
+                //   // Iterate over all the elements in the audio buffer
+                //   for (int i = 0; i < ab.size(); i++) {
 
-                    float c = map(i, 0, ab.size(), 0, 255);
-                    stroke(c, 255, 255);
-                    lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);
+                //     float c = map(i, 0, ab.size(), 0, 255);
+                //     stroke(c, 255, 255);
+                //     lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);
         
-                    line(height - lerpedBuffer[i] * height * 4, height + lerpedBuffer[i] * height * 4, i,i); // this looks cool
+                //     line(height - lerpedBuffer[i] * height * 4, height + lerpedBuffer[i] * height * 4, i,i); // this looks cool
                     
+                // }
+                float r = 1f;
+                int numPoints =20;
+                float thetaInc = TWO_PI / (float) numPoints;
+                strokeWeight(2);
+                stroke(255);
+                float lastX=width/2;
+                float lastY = height/2;
+                for(int i=0; i < 1000;i ++){
+                    float c = map(i,0,300,0,255);
+                    stroke(c,255,255,100);
+                    //calculating points on the outside of the circle
+                    float theta = i * thetaInc + lerpedAverage *5;
+                    float x = width /2 + sin(theta) * r;
+                    float y = height /2 + cos(theta) * r;
+                    r+=0.05f;
+                    strokeWeight(2 * lerpedAverage);
+                    line(lastX,lastY, x, y);
+                    lastX =x;
+                    lastY =y;
+
                 }
                
                 // ??
