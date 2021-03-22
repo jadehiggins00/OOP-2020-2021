@@ -4,7 +4,7 @@ import processing.core.PApplet;
 
 public class YASC extends PApplet {
     boolean[] keys = new boolean[1024];
-    
+    Player p;
     
 
    
