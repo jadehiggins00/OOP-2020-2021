@@ -5,37 +5,32 @@ import processing.core.PApplet;
 public class YASC extends PApplet {
     boolean[] keys = new boolean[1024];
 
-    float x, y;
-    float w = 50;
-    float halfW = w / 2;
+    
+    // Update your forks!
+    // Create a branch for today monday9
+    // Write drawPlayer
+    // Write movePlayer
 
-    void drawPlayer(float x, float y)
-    {
-
-    }
-
-    void movePlayer()
-    {
-        if (checkKey(UP))
-        {
-            y -= 1;
-        }
-    }
+    Player p, p1;
 
     public void settings() {
         size(500, 500);
     }
 
     public void setup() {
-        x = width / 2;
-        y = height / 2;
+        p = new Player(this, width / 2, height / 2);
+        p1 = new Player(this, 100, 100);
     }
 
     public void draw() {
         background(0);
         stroke(255);
-        drawPlayer(x, y);
-        movePlayer();
+        p.update();
+        p.render();
+        
+        p1.update();
+        p1.render();
+        
     }
 
     boolean checkKey(int k) {
