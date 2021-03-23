@@ -14,32 +14,34 @@ public class Audio2 extends PApplet {
     AudioBuffer ab;
     AudioInput ai;
     // making an object of fft
-    // 
+    //
     FFT fft;
 
     // arrayys for bands
     float[] bands;
     float[] smoothedBands;
 
-    // divides fft into anothe array, things are spaced logirithmly rather than linear
+    // divides fft into anothe array, things are spaced logirithmly rather than
+    // linear
     void calculateFrequencyBands() {
         for (int i = 0; i < bands.length; i++) {
-          int start = (int) pow(2, i) - 1;
-          int w = (int) pow(2, i);
-          int end = start + w;
-          float average = 0;
-          for (int j = start; j < end; j++) {
-            average += fft.getBand(j) * (j + 1);
-          }
-          average /= (float) w;
-          bands[i] = average * 5;
-          smoothedBands[i] = lerp(smoothedBands[i], bands[i], 0.05f);
+            int start = (int) pow(2, i) - 1;
+            int w = (int) pow(2, i);
+            int end = start + w;
+            float average = 0;
+            for (int j = start; j < end; j++) {
+                average += fft.getBand(j) * (j + 1);
+            }
+            average /= (float) w;
+            bands[i] = average * 5;
+            smoothedBands[i] = lerp(smoothedBands[i], bands[i], 0.05f);
         }
-      }
+    }
 
     public void settings() {
         size(1024, 1024);
-        //fullScreen(P3D, SPAN); // Try this for full screen multiple monitor support :-) Be careful of exceptions!
+        // fullScreen(P3D, SPAN); // Try this for full screen multiple monitor support
+        // :-) Be careful of exceptions!
     }
 
     float y = 200;
@@ -47,48 +49,51 @@ public class Audio2 extends PApplet {
 
     int which = 0;
 
-    private float[] frequencies = {293.66f, 329.63f, 369.99f, 392.00f, 440.00f, 493.88f, 554.37f, 587.33f
-        , 659.25f, 739.99f, 783.99f, 880.00f, 987.77f, 1108.73f, 1174.66f, 1318.51f, 1479.98f, 1567.98f, 1760.00f, 1975.53f, 2217.46f, 2349.32f};
-    String[] spellings = {"D,", "E,", "F,", "G,", "A,", "B,", "C", "D", "E", "F", "G", "A", "B","c", "d", "e", "f", "g", "a", "b", "c'", "d'", "e'", "f'", "g'", "a'", "b'", "c''", "d''"}; 	
+    private float[] frequencies = { 293.66f, 329.63f, 369.99f, 392.00f, 440.00f, 493.88f, 554.37f, 587.33f, 659.25f,
+            739.99f, 783.99f, 880.00f, 987.77f, 1108.73f, 1174.66f, 1318.51f, 1479.98f, 1567.98f, 1760.00f, 1975.53f,
+            2217.46f, 2349.32f };
+    String[] spellings = { "D,", "E,", "F,", "G,", "A,", "B,", "C", "D", "E", "F", "G", "A", "B", "c", "d", "e", "f",
+            "g", "a", "b", "c'", "d'", "e'", "f'", "g'", "a'", "b'", "c''", "d''" };
 
-
-    String spell(float freq)
-    {
-        // Return the element from the spellings array that freq is closest 
+    String spell(float freq) {
+        // Return the element from the spellings array that freq is closest
         // to in the frequency array
 
+        // for closest note
         int closestIndex = 0;
+
         float smalestGap = Float.MAX_VALUE;
-        for(int i = 0 ; i < frequencies.length ; i ++)
-        {
+        for (int i = 0; i < frequencies.length; i++) {
+            // gap is the difference  
             float gap = abs(freq - frequencies[i]);
-            if (gap < smalestGap)
-            {
+            if (gap < smalestGap) {
                 smalestGap = gap;
                 closestIndex = i;
-            }            
+            }
         }
+
+        //need to return the element from the spellings array that freq is closest to in the frquency array
         return spellings[closestIndex];
     }
 
-    // log2 functions for bands 
+    // log2 functions for bands
     float log2(float f) {
         return log(f) / log(2.0f);
-      }
+    }
 
-    public void setup() {         
+    public void setup() {
         colorMode(HSB);
 
         minim = new Minim(this);
         ap = minim.loadFile("thestoryofus.mp3", width);
         // for mic input
-        ai = minim.getLineIn(Minim.MONO, width, 44100, 16); 
+        ai = minim.getLineIn(Minim.MONO, width, 44100, 16);
         ab = ap.mix; // for mic use ai.mix
 
-        //instantiate ff - frame size and sample rate
+        // instantiate ff - frame size and sample rate
         fft = new FFT(width, 44100);
 
-        // 
+        //
         bands = new float[(int) log2(width)];
         smoothedBands = new float[bands.length];
 
@@ -98,14 +103,10 @@ public class Audio2 extends PApplet {
         if (keyCode >= '0' && keyCode <= '5') {
             which = keyCode - '0';
         }
-        if (keyCode == ' ')
-        {
-            if (ap.isPlaying())
-            {
+        if (keyCode == ' ') {
+            if (ap.isPlaying()) {
                 ap.pause();
-            }
-            else
-            {
+            } else {
                 ap.rewind();
                 ap.play();
             }
@@ -118,42 +119,38 @@ public class Audio2 extends PApplet {
         background(0);
         stroke(255);
 
-
         float halfHeight = height / 2;
-        for(int i = 0 ; i < ab.size() ; i ++)
-        {
-            // for colour 
+        for (int i = 0; i < ab.size(); i++) {
+            // for colour
             stroke(map(i, 0, ab.size(), 0, 255), 255, 255);
             // plottimg the audio buffer - draws lines above and below the centre
             line(i, halfHeight - (ab.get(i) * halfHeight), i, halfHeight + (ab.get(i) * halfHeight));
         }
 
         // run fft over the sample buffer
-        // 
+        //
         fft.window(FFT.HAMMING);
         // this does the fft algorithm
         fft.forward(ab);
 
         // plotting fft alg
         int highestBand = 0;
-        // specSize is how  you get the size of the fft array
-        for(int i = 0 ; i < fft.specSize() ; i ++)
-        {
+        // specSize is how you get the size of the fft array
+        for (int i = 0; i < fft.specSize(); i++) {
             stroke(map(i, 0, fft.specSize(), 0, 255), 255, 255);
-            // this is how yyou index into the fft array  
-            // you get an element out of the array by calling getBand   
+            // this is how yyou index into the fft array
+            // you get an element out of the array by calling getBand
             line(i, height, i, height - (fft.getBand(i) * halfHeight));
 
             // comparing valuee from fft array with the one we thing is the highest
-            if (fft.getBand(i) > fft.getBand(highestBand))
-            {
+            if (fft.getBand(i) > fft.getBand(highestBand)) {
                 highestBand = i;
             }
         }
-        
+
         /*
-        printing out the frequency
-        */
+         * printing out the frequency
+         */
         float freq = fft.indexToFreq(highestBand);
         textSize(24);
         fill(255);
@@ -163,21 +160,17 @@ public class Audio2 extends PApplet {
         // calling this method to sum up into freq bands
         calculateFrequencyBands();
 
-        // width of the screeen divided byy bands.length
+        //   width of the screeen divided byy bands.length
+
+        // line(x, height, w, smoothedBands[i]); // this looks cool
         float w = width / (float) bands.length;
-        for(int i = 0 ; i < bands.length ; i ++)
-        {
-            // mapping x onto the width of the screen
-            float x = map(i, 55, bands.length, 0, width);
-            //colour
+        for (int i = 0; i < bands.length; i++) {
+            float x = map(i, 0, bands.length, 0, width);
             float c = map(i, 0, bands.length, 0, 255);
             noStroke();
-            //stroke(c,255,255);
             fill(c, 255, 255);
+            // smoothed bands contains bands and is using the lerped function
             rect(x, height, w, -smoothedBands[i]);
-
-            
-            //line(x, height, w, smoothedBands[i]); // this looks cool
-        }    
+        }
     }
 }
