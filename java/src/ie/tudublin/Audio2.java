@@ -13,11 +13,15 @@ public class Audio2 extends PApplet {
     AudioPlayer ap;
     AudioBuffer ab;
     AudioInput ai;
+    // making an object of fft
+    // 
     FFT fft;
 
+    // arrayys for bands
     float[] bands;
     float[] smoothedBands;
 
+    // divides fft into anothe array, things are spaced logirithmly rather than linear
     void calculateFrequencyBands() {
         for (int i = 0; i < bands.length; i++) {
           int start = (int) pow(2, i) - 1;
@@ -67,6 +71,7 @@ public class Audio2 extends PApplet {
         return spellings[closestIndex];
     }
 
+    // log2 functions for bands 
     float log2(float f) {
         return log(f) / log(2.0f);
       }
@@ -75,12 +80,15 @@ public class Audio2 extends PApplet {
         colorMode(HSB);
 
         minim = new Minim(this);
-        ap = minim.loadFile("heroplanet.mp3", width);
+        ap = minim.loadFile("thestoryofus.mp3", width);
+        // for mic input
         ai = minim.getLineIn(Minim.MONO, width, 44100, 16); 
-        ab = ap.mix;
+        ab = ap.mix; // for mic use ai.mix
 
+        //instantiate ff - frame size and sample rate
         fft = new FFT(width, 44100);
 
+        // 
         bands = new float[(int) log2(width)];
         smoothedBands = new float[bands.length];
 
@@ -110,33 +118,49 @@ public class Audio2 extends PApplet {
         background(0);
         stroke(255);
 
+
         float halfHeight = height / 2;
         for(int i = 0 ; i < ab.size() ; i ++)
         {
+            // for colour 
             stroke(map(i, 0, ab.size(), 0, 255), 255, 255);
-            //line(i, halfHeight - (ab.get(i) * halfHeight), i, halfHeight + (ab.get(i) * halfHeight));
+            // plottimg the audio buffer - draws lines above and below the centre
+            line(i, halfHeight - (ab.get(i) * halfHeight), i, halfHeight + (ab.get(i) * halfHeight));
         }
 
+        // run fft over the sample buffer
+        // 
         fft.window(FFT.HAMMING);
+        // this does the fft algorithm
         fft.forward(ab);
 
+        // plotting fft alg
         int highestBand = 0;
+        // specSize is how  you get the size of the fft array
         for(int i = 0 ; i < fft.specSize() ; i ++)
         {
             stroke(map(i, 0, fft.specSize(), 0, 255), 255, 255);
+            // this is how yyou index into the fft array  
+            // you get an element out of the array by calling getBand   
             line(i, height, i, height - (fft.getBand(i) * halfHeight));
+
+            // comparing valuee from fft array with the one we thing is the highest
             if (fft.getBand(i) > fft.getBand(highestBand))
             {
                 highestBand = i;
             }
         }
-
+        
+        /*
+        printing out the frequency
+        */
         float freq = fft.indexToFreq(highestBand);
         textSize(24);
         fill(255);
         text("Frequency: " + freq, 10, 50);
         text("Note: " + spell(freq), 10, 100);
 
+        // calling this method to sum up into freq bands
         calculateFrequencyBands();
 
         
