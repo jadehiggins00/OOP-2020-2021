@@ -163,15 +163,21 @@ public class Audio2 extends PApplet {
         // calling this method to sum up into freq bands
         calculateFrequencyBands();
 
-        
+        // width of the screeen divided byy bands.length
         float w = width / (float) bands.length;
         for(int i = 0 ; i < bands.length ; i ++)
         {
-            float x = map(i, 0, bands.length, 0, width);
+            // mapping x onto the width of the screen
+            float x = map(i, 55, bands.length, 0, width);
+            //colour
             float c = map(i, 0, bands.length, 0, 255);
             noStroke();
+            //stroke(c,255,255);
             fill(c, 255, 255);
             rect(x, height, w, -smoothedBands[i]);
+
+            
+            //line(x, height, w, smoothedBands[i]); // this looks cool
         }    
     }
 }
