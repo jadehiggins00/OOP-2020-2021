@@ -217,38 +217,61 @@ public class Audio1 extends PApplet {
                 // // during even numbered seconds
                 // if (second() % 2 == 0){
                     
-                //     jitter = random(-0.1,0.5);
+                //     jitter = random(-0.1,0.1);
                 // }
 
+                
                 // angle = angle + jitter;
                 
-                // float x  = sin(angle);
+                // float x  = -sin(angle);
                 
                 // translate(width * 0.15f, height /3, 0);
                 // rotate(x);
                 
                 // angle += 0.01;
 
+                // float offset = 60;
+                // float scalar = 2;
+                // float speed = 0.05f;
+
+                // float x = offset + cos(angle) * scalar;
+                // float y = offset + sin(angle) * scalar;
+                // ellipse(x,y,2,2);
+                // angle += speed;
+                // scalar += speed;
+
+                
+                // guitar circular motion
+                translate(width * 0.01f, height / 2, 0);
+                rotate(radians(315));
 
                 beginShape();
                 fill(0,255,0);
                 // guitar body
                 vertex(230,800, s); //bottom point left
+
                 //guitar neck
                 vertex(325,570,s); 
                 vertex(325, 320,s); 
+
                 //guitar head
                 vertex(310, 320,s); 
                 vertex(310, 240,s);
                 vertex(370,320,s);
                 vertex(355,320,s);
                 vertex(355,570,s);
-                // guitar body
+
+                // guitar body 
                 vertex(460, 800,s);
                 vertex(355,700,s);
                 vertex(325,700,s);
                 vertex(230,800,s);
+            
                 endShape();
+               
+
+    
+               
                // angle += 0.1;
                 popMatrix();
              
