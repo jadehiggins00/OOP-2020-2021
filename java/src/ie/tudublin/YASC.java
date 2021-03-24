@@ -29,7 +29,7 @@ public class YASC extends PApplet {
         stroke(255);
         p.update();
         p.render();
-        h.render();
+        h.render(h.ranX, h.ranY);
         h.update();
         
         // Check collisions        

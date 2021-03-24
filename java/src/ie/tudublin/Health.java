@@ -9,6 +9,7 @@ public class Health {
     float halfW = w /2;
     YASC yasc; // referencing the yasc cl
     float rotation;
+    float ranX, ranY;
     
 
     //constructor 
@@ -16,19 +17,22 @@ public class Health {
         this.yasc = yasc;
         this.x = x;
         this.y = y;
-      
+        // for random position on the screen
+        ranX = yasc.random(yasc.width -70);
+        ranY = yasc.random(yasc.height -80);
 
         rotation = 0;
 
     }//end constructor
     
     // drawing the health object
-    void render(){
+    void render(float x, float y){
         yasc.stroke(0,255,0);
-        yasc.fill(0,255,0);
+        yasc.noFill();
         yasc.translate(x, y);
         yasc.rotate(rotation);
-        yasc.line(- halfW, halfW, 0, - halfW);
+        // yasc.rect(w,halfW,40,40);
+        yasc.line(- halfW, halfW, 0, -halfW);
         yasc.line(0, - halfW, halfW, halfW);
         yasc.line(halfW, halfW, 0, 0);
         yasc.line(0, 0, - halfW, halfW);
@@ -45,12 +49,15 @@ public class Health {
         // y += yasc.random(-speed, speed);
 
         // diagonal direction
+        yasc.random(dx,dy);
         x += dx;
         y += dy;
-        x--;
+        x++;
+        
 
         // rotate
-        rotation -= 0.1f;
+        yasc.rotate(rotation);
+        rotation -= 0.05f;
         
 
 
