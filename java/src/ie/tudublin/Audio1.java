@@ -15,6 +15,7 @@ public class Audio1 extends PApplet {
 
     float[] lerpedBuffer;
     float jitter;
+   
 
     public void settings() {
         size(1000, 1000, P3D);
@@ -253,7 +254,16 @@ public class Audio1 extends PApplet {
              
 
             }
+            int time1 = 6000;
+            int currentTime = millis();
+            if(currentTime > time1){
+                textSize(32);
+                fill(255);
+                text("The story of us ", 100, 70);
+            }
 
+            int timer = second();
+            text(timer, 100,100);
         }
         }
     }
