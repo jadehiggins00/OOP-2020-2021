@@ -11,6 +11,7 @@ public class Player {
     YASC yasc;
     float rotation;
 
+
     public Player(YASC yasc, float x, float y)
     {
         this.yasc = yasc;
