@@ -12,6 +12,7 @@ public class YASC extends PApplet {
     // Write movePlayer
 
     Player p;
+    Health h;
 
     public void settings() {
         size(500, 500);
