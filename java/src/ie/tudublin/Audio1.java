@@ -14,6 +14,7 @@ public class Audio1 extends PApplet {
     AudioBuffer ab; // Samples
 
     float[] lerpedBuffer;
+    float jitter;
 
     public void settings() {
         size(1000, 1000, P3D);
@@ -29,7 +30,7 @@ public class Audio1 extends PApplet {
     public void setup() {
         minim = new Minim(this);
         // ai = minim.getLineIn(Minim.MONO, width, 44100, 16);
-        ap = minim.loadFile("pin.mp3", width);
+        ap = minim.loadFile("thestoryofus.mp3", width);
         ap.play();
         ab = ap.mix; // Connect the buffer to the mp3 file
         // ab = ai.mix;
@@ -167,6 +168,7 @@ public class Audio1 extends PApplet {
             // fill(c, 255, 255); // --------------this looks coool
             angle += 0.01f; // this makes it rotates
             float s = 100 + (100 * lerpedAverage * 10); // this is the size
+            
 
             // if you didnt hit the two cube button
             if (!twoCubes) {
@@ -186,7 +188,7 @@ public class Audio1 extends PApplet {
                 popMatrix();
 
                 pushMatrix();
-                spotLight(255, 0, 0, width / 2, height / 2, 400, 0, 0, -1, PI / 4, 2);
+                //spotLight(255, 0, 0, width / 2, height / 2, 400, 0, 0, -1, PI / 4, 2);
                 // translate means move - brings origin to the screen
                 translate(width * 0.75f, height / 2, 0);
                 fill(c, 255, 255);
@@ -207,31 +209,46 @@ public class Audio1 extends PApplet {
                 sphere(s);
                 popMatrix();
 
+                // ---------- guitar shape
                 pushMatrix();
                 
+                
+                // // during even numbered seconds
+                // if (second() % 2 == 0){
+                    
+                //     jitter = random(-0.1,0.5);
+                // }
+
+                // angle = angle + jitter;
+                
+                // float x  = sin(angle);
+                
+                // translate(width * 0.15f, height /3, 0);
+                // rotate(x);
+                
+                // angle += 0.01;
+
+
                 beginShape();
                 fill(0,255,0);
                 // guitar body
-                vertex(230,800); //bottom point left
+                vertex(230,800, s); //bottom point left
                 //guitar neck
-                vertex(325,570); 
-                vertex(325, 320); 
+                vertex(325,570,s); 
+                vertex(325, 320,s); 
                 //guitar head
-                vertex(310, 320); 
-                vertex(310, 240);
-                vertex(370,320);
-                vertex(355,320);
-                vertex(355,570);
+                vertex(310, 320,s); 
+                vertex(310, 240,s);
+                vertex(370,320,s);
+                vertex(355,320,s);
+                vertex(355,570,s);
                 // guitar body
-                vertex(460, 800);
-                vertex(355,700);
-                vertex(325,700);
-                vertex(230,800);
-                
-                
-                
-
+                vertex(460, 800,s);
+                vertex(355,700,s);
+                vertex(325,700,s);
+                vertex(230,800,s);
                 endShape();
+               // angle += 0.1;
                 popMatrix();
              
 
@@ -239,5 +256,9 @@ public class Audio1 extends PApplet {
 
         }
         }
+    }
+
+    private float random(double d, double e) {
+        return 0;
     }
 }
