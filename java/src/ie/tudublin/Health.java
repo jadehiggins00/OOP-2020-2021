@@ -13,50 +13,92 @@ public class Health {
     float ranX, ranY;
 
     // constructor
-    public Health(YASC yasc, float x, float y) {
+    public Health(YASC yasc) {
         this.yasc = yasc;
-        this.x = x;
-        this.y = y;
+
+        int dice = (int) yasc.random(4); // between 0 and 399
+
+        respawn();
+
         // for random position on the screen
-        ranX = yasc.random(yasc.width - 270);
-        ranY = yasc.random(yasc.height - 80);
+        // ranX = yasc.random(yasc.width - 270);
+        // ranY = yasc.random(yasc.height - 80);
 
         rotation = 0;
 
     }// end constructor
 
+    public void respawn() {
+        switch (dice) {
+
+        case 0:
+            x = -halfW;
+            y = yasc.random(halfW, yasc.height);
+            dx = yasc.random(1, 4); // random val
+            dy = yasc.random(-1, 1);
+            break;
+
+        case 1:
+            x = yasc.random(halfW, yasc.height);
+            y = -halfW;
+            dx = yasc.random(-1, 1); // random val
+            dy = yasc.random(1, 4); // random val
+            break;
+
+        case 2:
+            x = yasc.width + halfW;
+            y = yasc.random(halfW, yasc.height - halfW);
+            dx = yasc.random(-1, -4); // random val
+            dy = yasc.random(-1, 1); // random val
+            break;
+
+        case 3:
+            x = yasc.random(halfW, yasc.height - halfW);
+            y = yasc.width + halfW;
+            dx = yasc.random(-1, 1); // random val
+            dy = yasc.random(-1, -4); // random val
+            break;
+
+        }// end switch
+
+    }//end constructor
+
     // drawing the health object
     void render(float x, float y) {
-        yasc.stroke(0, 255, 0);
-        yasc.noFill();
+        // yasc.stroke(0, 255, 0);
+        // yasc.noFill();
+        // yasc.translate(x, y);
+        // yasc.rotate(rotation);
+        // // yasc.rect(w,halfW,40,40);
+        // yasc.line(-halfW, halfW, 0, -halfW);
+        // yasc.line(0, -halfW, halfW, halfW);
+        // yasc.line(halfW, halfW, 0, 0);
+        // yasc.line(0, 0, -halfW, halfW);
+
+        yasc.pushMatrix();
         yasc.translate(x, y);
         yasc.rotate(rotation);
-        // yasc.rect(w,halfW,40,40);
-        yasc.line(-halfW, halfW, 0, -halfW);
-        yasc.line(0, -halfW, halfW, halfW);
-        yasc.line(halfW, halfW, 0, 0);
-        yasc.line(0, 0, -halfW, halfW);
+        yasc.rectMode(PApplet.CENTER);
+        yasc.rect(-halfW, -halfW, w, w);
+        yasc.stroke(255);
+        yasc.noFill();
+        yasc.line(0, halfW, 0, -halfW);
+        yasc.line(-halfW, 0, halfW, 0);
+        yasc.popMatrix();
 
     }// end method
 
     // moving the object
     void update() {
-        dx = PApplet.sin(rotation);
-        dy = -PApplet.cos(rotation);
-
-        float speed = 2.5f;
-        // x += yasc.random(-speed, speed);
-        y += yasc.random(-speed, speed);
+     
 
         // diagonal direction
 
         x += dx;
         y += dy;
-        x++;
+        
 
-        // rotate
-        yasc.rotate(rotation);
-        rotation -= 0.05f;
+        rotation += 0.05f;
 
     }// endmethod
 
