@@ -16,16 +16,16 @@ public class Player {
         this.x = x;
         this.y = y;
         rotation =0;
-    }
+    }//end constructor
 
-    void render(float x, float y)
+    void render()
     {
         yasc.rotate(rotation);
         yasc.line(x - halfW, y + halfW, x, y - halfW);
         yasc.line(x, y - halfW, x + halfW, y + halfW);
         yasc.line(x + halfW, y + halfW, x, y);
         yasc.line(x,y, x - halfW, y + halfW);
-    }
+    }//end method
 
     void update()
     {
