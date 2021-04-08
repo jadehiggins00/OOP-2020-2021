@@ -56,7 +56,7 @@ public class Audio2 extends PApplet {
         colorMode(HSB);
 
  
-
+    }
     public void keyPressed() {
         if (keyCode >= '0' && keyCode <= '5') {
             which = keyCode - '0';
