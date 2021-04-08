@@ -13,14 +13,15 @@ public class Player {
     float speed =5;
     int health;
 
-
+    // constructor
     public Player(YASC yasc, float x, float y)
     {
         this.yasc = yasc;
         this.x = x;
         this.y = y;
         rotation = 0;
-    }
+    }//end contructor
+
 
     void render()
     {
@@ -28,7 +29,7 @@ public class Player {
         yasc.translate(x, y);
         yasc.rotate(rotation);
         // Write this!!
-        yasc.text("Health" +health, 50, 0);
+        yasc.text("Health: " +health, 50, 0);
         yasc.line(- halfW, halfW, 0, - halfW);
         yasc.line(0, - halfW, halfW, halfW);
         yasc.line(halfW, halfW, 0, 0);

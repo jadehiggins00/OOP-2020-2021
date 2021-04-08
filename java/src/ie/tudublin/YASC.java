@@ -36,15 +36,22 @@ public class YASC extends PApplet {
         
         // Check collisions        
         checkCollisions();
-    }
+    }// end method
 
+    /*
+    This method is used to check the collisions between
+    the player and the health object
+    */
     void checkCollisions() 
-    {
+    {   
+        // checking if the distance of player x,y and health x,yy coord. is greaterr than player
+        // and health half of the width
         if(dist(p.x,p.y,h.x,h.y) < p.halfW + h.halfW){
+            // player health will increase by 10
             p.health += 10;
             h.respawn();
-        }
-    }
+        }//end if
+    }//end method
 
     boolean checkKey(int k) {
         if (keys.length >= k) {

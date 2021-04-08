@@ -17,8 +17,6 @@ public class Health {
     public Health(YASC yasc) {
         this.yasc = yasc;
 
-       
-
         respawn();
 
         // for random position on the screen
@@ -30,6 +28,7 @@ public class Health {
     }// end constructor
 
     public void respawn() {
+        // random values between 1 and 4
         int dice = (int) yasc.random(4); // between 0 and 399
         switch (dice) {
 
@@ -63,7 +62,7 @@ public class Health {
 
         }// end switch
 
-    }//end constructor
+    }// end constructor
 
     // drawing the health object
     void render() {
@@ -77,14 +76,13 @@ public class Health {
         // yasc.line(halfW, halfW, 0, 0);
         // yasc.line(0, 0, -halfW, halfW);
 
-        
-       
+        // yasc.shapeMode(PApplet.CENTER);
         yasc.pushMatrix();
         yasc.translate(x, y);
         yasc.rotate(rotation);
         yasc.rectMode(PApplet.CENTER);
         yasc.rect(0, 0, w, w);
-        yasc.stroke(255);
+        yasc.stroke(0, 255, 0);
         yasc.noFill();
         yasc.line(0, halfW, 0, -halfW);
         yasc.line(-halfW, 0, halfW, 0);
@@ -94,19 +92,16 @@ public class Health {
 
     // moving the object
     void update() {
-     
 
         // diagonal direction
 
         x += dx;
         y += dy;
         rotation += 0.05f;
-
-        if ( x < - halfW || x > yasc.width + halfW || y < - halfW || y > yasc.width + halfW){
+        // checking for out of bounds of the screen
+        if (x < -halfW || x > yasc.width + halfW || y < -halfW || y > yasc.width + halfW) {
             respawn();
-        }//end if
-
-
+        } // end if
 
     }// endmethod
 
