@@ -30,8 +30,9 @@ import processing.core.PApplet;
     // a walker has two functions. 1. the walker will display itself as a white dot
     public void display(){
         stroke(0);
+        
         point(x,y);
-
+     
     }//end method
 
     // directs walker to take a step

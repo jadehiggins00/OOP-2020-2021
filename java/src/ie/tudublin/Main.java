@@ -78,9 +78,28 @@ public class Main
         String[] a = {"MAIN"};
         processing.core.PApplet.runSketch( a, new RandomNumber());
     }
+
+    public void randomGenerator()
+    {
+        String[] a = {"MAIN"};
+        processing.core.PApplet.runSketch( a, new RandomGenerator());
+    }
+
+    
+    public void noiseWalker()
+    {
+        String[] a = {"MAIN"};
+        processing.core.PApplet.runSketch( a, new NoiseWalker());
+    }
+
+    public void perlinNoise()
+    {
+        String[] a = {"MAIN"};
+        processing.core.PApplet.runSketch( a, new PerlinNoise());
+    }
     public static void main(String[] args)
     {
         Main main = new Main();
-        main.randomNumber();
+        main.perlinNoise();
     }
 } 
