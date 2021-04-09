@@ -85,7 +85,7 @@ public class Audio2 extends PApplet {
         colorMode(HSB);
 
         minim = new Minim(this);
-        ap = minim.loadFile("thestoryofus.mp3", width);
+        ap = minim.loadFile("in-for-the-kill.mp3", width);
         // for mic input
         ai = minim.getLineIn(Minim.MONO, width, 44100, 16);
         ab = ap.mix; // for mic use ai.mix

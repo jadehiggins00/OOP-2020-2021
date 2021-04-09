@@ -15,7 +15,6 @@ public class Audio1 extends PApplet {
 
     float[] lerpedBuffer;
     float jitter;
-   
 
     public void settings() {
         size(1000, 1000, P3D);
@@ -41,7 +40,7 @@ public class Audio1 extends PApplet {
     }
 
     public void keyPressed() {
-        if (keyCode >= '0' && keyCode <= '6') {
+        if (keyCode >= '0' && keyCode <= '7') {
             which = keyCode - '0';
         }
         if (keyCode == ' ') {
@@ -136,7 +135,7 @@ public class Audio1 extends PApplet {
             rectMode(CENTER);
             float size = 50 + (lerpedAverage * 500);
             rect(width / 2, height / 2, size, size);
-            
+
             break;
         }
         case 5: {
@@ -160,7 +159,7 @@ public class Audio1 extends PApplet {
             break;
         }
         case 6: {
-        //    background(255);
+            // background(255);
             lights(); // adding lights
             strokeWeight(2);
             float c = map(lerpedAverage, 0, 1, 0, 255);
@@ -169,7 +168,6 @@ public class Audio1 extends PApplet {
             // fill(c, 255, 255); // --------------this looks coool
             angle += 0.01f; // this makes it rotates
             float s = 100 + (100 * lerpedAverage * 10); // this is the size
-            
 
             // if you didnt hit the two cube button
             if (!twoCubes) {
@@ -189,7 +187,7 @@ public class Audio1 extends PApplet {
                 popMatrix();
 
                 pushMatrix();
-                //spotLight(255, 0, 0, width / 2, height / 2, 400, 0, 0, -1, PI / 4, 2);
+                // spotLight(255, 0, 0, width / 2, height / 2, 400, 0, 0, -1, PI / 4, 2);
                 // translate means move - brings origin to the screen
                 translate(width * 0.75f, height / 2, 0);
                 fill(c, 255, 255);
@@ -203,31 +201,29 @@ public class Audio1 extends PApplet {
                 pushMatrix();
                 translate(width * 0.75f, height / 2, 0);
                 noFill();
-                stroke(c,255,255);
+                stroke(c, 255, 255);
                 rotateY(angle);
                 rotateX(angle);
-             
+
                 sphere(s);
                 popMatrix();
 
                 // ---------- guitar shape
                 pushMatrix();
-                
-                
+
                 // // during even numbered seconds
                 // if (second() % 2 == 0){
-                    
-                //     jitter = random(-0.1,0.1);
+
+                // jitter = random(-0.1,0.1);
                 // }
 
-                
                 // angle = angle + jitter;
-                
-                // float x  = -sin(angle);
-                
+
+                // float x = -sin(angle);
+
                 // translate(width * 0.15f, height /3, 0);
                 // rotate(x);
-                
+
                 // angle += 0.01;
 
                 // float offset = 60;
@@ -240,54 +236,62 @@ public class Audio1 extends PApplet {
                 // angle += speed;
                 // scalar += speed;
 
-                
                 // guitar circular motion
                 translate(width * 0.01f, height / 2, 0);
                 rotate(radians(315));
 
                 beginShape();
-                fill(0,255,0);
+                fill(0, 255, 0);
                 // guitar body
-                vertex(230,800, s); //bottom point left
+                vertex(230, 800, s); // bottom point left
 
-                //guitar neck
-                vertex(325,570,s); 
-                vertex(325, 320,s); 
+                // guitar neck
+                vertex(325, 570, s);
+                vertex(325, 320, s);
 
-                //guitar head
-                vertex(310, 320,s); 
-                vertex(310, 240,s);
-                vertex(370,320,s);
-                vertex(355,320,s);
-                vertex(355,570,s);
+                // guitar head
+                vertex(310, 320, s);
+                vertex(310, 240, s);
+                vertex(370, 320, s);
+                vertex(355, 320, s);
+                vertex(355, 570, s);
 
-                // guitar body 
-                vertex(460, 800,s);
-                vertex(355,700,s);
-                vertex(325,700,s);
-                vertex(230,800,s);
-            
+                // guitar body
+                vertex(460, 800, s);
+                vertex(355, 700, s);
+                vertex(325, 700, s);
+                vertex(230, 800, s);
+
                 endShape();
-               
 
-    
-               
-               // angle += 0.1;
+                // angle += 0.1;
                 popMatrix();
-             
 
             }
             int time1 = 6000;
             int currentTime = millis();
-            if(currentTime > time1){
+            if (currentTime > time1) {
                 textSize(32);
                 fill(255);
                 text("The story of us ", 100, 70);
             }
 
             int timer = second();
-            text(timer, 100,100);
-        }
+            text(timer, 100, 100);
+        }//end case 6
+        break;
+        // twinkling stars
+        case 7: {
+          
+            
+            noStroke();
+            fill(0,70); //opacity on the fill - this is like a tint
+            rect(0,0,width,height);
+
+            fill(255);
+            ellipse(random(width), random(height), 14, 12);
+
+        }//end case 7
         }
     }
 
