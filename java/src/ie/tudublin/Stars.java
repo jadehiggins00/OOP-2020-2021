@@ -23,7 +23,7 @@ public class Stars extends PApplet {
         rect(0,0,width,height);
 
         fill(255);
-        ellipse(random(width), random(height), 5, 5);
+        ellipse(random(width), random(height), 4, 4);
     }//end metod
     
 }//end class
