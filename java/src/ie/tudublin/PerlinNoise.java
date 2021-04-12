@@ -6,7 +6,7 @@ public class PerlinNoise extends PApplet{
     
 
     public void settings(){
-        size(640, 240);
+        size(500, 500);
 
        
     }//end method
@@ -32,8 +32,8 @@ public class PerlinNoise extends PApplet{
             float  yoff =0.0f;
             for(int y=0; y < height ; y ++){
               
-                float bright = map(noise(xoff,yoff),0,1,0,255); //using xoff and yoff for noise
-                float c = map(mouseX, 0, width, 0, 175);
+                float bright = map(noise(xoff,yoff),0,1,0,175); //using xoff and yoff for noise
+                float c = map(mouseX, 0, width, 0, 255);
                 // using x and y for pixel location
                 pixels[x+y*width] = color(bright) ;
 
