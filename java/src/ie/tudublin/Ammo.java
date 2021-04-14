@@ -61,36 +61,44 @@ public class Ammo {
 
     }// end method
 
-    // drawing the object
-    void render() {
-
+    // creating the object
+    public void render()
+    {
         yasc.pushMatrix();
         yasc.translate(x, y);
         yasc.rotate(rotation);
-        yasc.rectMode(PApplet.CENTER);
-        yasc.rect(0, 0, w, w);
-        yasc.stroke(0, 0, 255);
+        // Write this!!
+        yasc.stroke(0, 255, 0);
         yasc.noFill();
-        yasc.line(0, halfW, 0, -halfW);
-        yasc.line(-halfW, 0, halfW, 0);
+        yasc.triangle(-halfW, halfW, 0, - halfW, halfW, halfW);        
         yasc.popMatrix();
-
-    }// end method
+    }
 
     // moving the object
-    void update() {
-
-        // diagonal direction
-
+    public void update()
+    {        
         x += dx;
         y += dy;
-        rotation += 0.05f;
-        // checking for out of bounds of the screen
-        if (x < -halfW || x > yasc.width + halfW || y < -halfW || y > yasc.width + halfW) {
-            respawn();
-        } // end if
+        rotation += 0.01f;
 
-    }// end method
+        if (x < - w)
+        {
+            respawn();
+        }
+        if (x > yasc.width + w)
+        {
+            respawn();
+        }
+
+        if (y < - w)
+        {
+            respawn();
+        }
+        if (y > yasc.height + w)
+        {
+            respawn();
+        }
+    }
 
     /* GETTERS AND SETTERS */
     public float getX() {
