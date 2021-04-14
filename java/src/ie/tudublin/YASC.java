@@ -55,16 +55,18 @@ public class YASC extends PApplet {
     {   
         // checking if the distance of player x,y and health x,yy coord. is greaterr than player
         // and health half of the width
-        if(dist(p.x,p.y,h.x,h.y) < p.halfW + h.halfW + a.halfW ){
+        if(dist(p.x,p.y,h.x,h.y) < p.halfW + h.halfW ){
             // player health will increase by 10
             p.health += 10;
             h.respawn();
-
-            p.ammo += 10;
-            a.respawn();
-
-            
         }//end if
+
+        // checking collisions for the ammo
+        if (dist(p.x, p.y, a.x, a.y) < p.halfW + a.halfW)
+        {
+            p.ammo += 10;
+            a.respawn();    
+        }//end if 
     }//end method
 
     boolean checkKey(int k) {
