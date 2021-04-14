@@ -13,6 +13,7 @@ public class YASC extends PApplet {
 
     Player p;
     Health h; // making an instance
+    Ammo a; //mkaing an instance
 
     public void settings() {
         size(500, 500);
@@ -24,15 +25,23 @@ public class YASC extends PApplet {
         // instantiate
         p = new Player(this, width / 2, height / 2);
         h = new Health(this);
+        a = new Ammo(this);
     }
 
     public void draw() {
         background(0);
         stroke(255);
+        //calling player methods
         p.update();
         p.render();
+
+        //calling health methods
         h.render();
         h.update();
+
+        //calling ammo methods
+        a.render();
+        a.update();
         
         // Check collisions        
         checkCollisions();
@@ -46,10 +55,15 @@ public class YASC extends PApplet {
     {   
         // checking if the distance of player x,y and health x,yy coord. is greaterr than player
         // and health half of the width
-        if(dist(p.x,p.y,h.x,h.y) < p.halfW + h.halfW){
+        if(dist(p.x,p.y,h.x,h.y) < p.halfW + h.halfW + a.halfW ){
             // player health will increase by 10
             p.health += 10;
             h.respawn();
+
+            p.ammo += 10;
+            a.respawn();
+
+            
         }//end if
     }//end method
 

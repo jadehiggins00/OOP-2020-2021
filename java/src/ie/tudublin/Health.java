@@ -62,7 +62,7 @@ public class Health {
 
         }// end switch
 
-    }// end constructor
+    }// end method
 
     // drawing the health object
     void render() {

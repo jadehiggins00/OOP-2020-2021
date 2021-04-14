@@ -12,6 +12,7 @@ public class Player {
     float rotation;
     float speed =5;
     int health;
+    int ammo;
 
     // constructor
     public Player(YASC yasc, float x, float y)
@@ -30,6 +31,9 @@ public class Player {
         yasc.rotate(rotation);
         // Write this!!
         yasc.text("Health: " +health, 50, 0);
+        yasc.text("\n\nAmmo: "+ammo, 50, 0);
+
+        //player
         yasc.line(- halfW, halfW, 0, - halfW);
         yasc.line(0, - halfW, halfW, halfW);
         yasc.line(halfW, halfW, 0, 0);
