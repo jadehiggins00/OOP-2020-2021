@@ -2,29 +2,16 @@ package ie.tudublin;
 
 import processing.core.PApplet;
 
-public class Health {
-    float x, y;
-    float dx, dy;
-    float w = 50;
-    float health;
-
-    float halfW = w / 2;
-    YASC yasc; // referencing the yasc cl
-    float rotation;
+public class Health extends GameObject {
+  
+ 
     float ranX, ranY;
 
     // constructor
     public Health(YASC yasc) {
-        this.yasc = yasc;
-
+        
+        super(yasc,0,0,0);
         respawn();
-
-        // for random position on the screen
-        // ranX = yasc.random(yasc.width - 270);
-        // ranY = yasc.random(yasc.height - 80);
-
-        rotation = 0;
-
     }// end constructor
 
     public void respawn() {
@@ -65,7 +52,7 @@ public class Health {
     }// end method
 
     // drawing the health object
-    void render() {
+    public void render() {
         // yasc.stroke(0, 255, 0);
         // yasc.noFill();
         // yasc.translate(x, y);
@@ -91,7 +78,7 @@ public class Health {
     }// end method
 
     // moving the object
-    void update() {
+    public void update() {
 
         // diagonal direction
 

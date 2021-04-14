@@ -4,24 +4,22 @@ import com.jogamp.graph.geom.Triangle;
 
 import processing.core.PApplet;
 
-public class Ammo {
+public class Ammo extends GameObject {
 
-    float x, y;
-    float dx, dy;
-    float w = 50;
+  
+   
     float health;
-    int ammo;
-    float halfW = w / 2;
-    YASC yasc; // referencing the yasc cl
-    float rotation;
+  
+    
+
     float ranX, ranY;
 
     // contructor
     public Ammo(YASC yasc) {
         
-        this.yasc = yasc;
+        super(yasc,0 ,0 ,0);
         respawn();
-        rotation = 0;
+        
     }// end constructor
 
     public void respawn() {

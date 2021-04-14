@@ -1,5 +1,6 @@
 package ie.tudublin;
 
+import java.util.ArrayList;
 import processing.core.PApplet;
 
 public class YASC extends PApplet {
@@ -15,6 +16,9 @@ public class YASC extends PApplet {
     Health h; // making an instance
     Ammo a; //mkaing an instance
 
+    //array list for bullets
+    ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+
     public void settings() {
         size(500, 500);
     }
@@ -29,7 +33,17 @@ public class YASC extends PApplet {
     }
 
     public void draw() {
+
+        
+        
+        fill(255);
         background(0);
+        
+        // size of the array = bullets.size();
+        text("Bullets: " + bullets.size(), 50, 50);
+
+        text("FPS: " + frameRate, 50, 100);
+
         stroke(255);
         //calling player methods
         p.update();
@@ -42,7 +56,24 @@ public class YASC extends PApplet {
         //calling ammo methods
         a.render();
         a.update();
+
+
+        // going backwards -> iterate
+        for(int i = bullets.size() - 1; i >= 0; i-- ){
+            Bullet b = bullets.get(i);
+            b.update();
+            b.render();
+        }//end for 
         
+        //interating over bullets using for each loop
+        // when using a for each loop, you cannot modify and or remove elements from inside of in it
+        // for(Bullet b:bullets) {
+
+        //     b.update();
+        //     b.render();
+
+        // }//end for each
+
         // Check collisions        
         checkCollisions();
     }// end method

@@ -2,29 +2,22 @@ package ie.tudublin;
 
 import processing.core.PApplet;
 
-public class Player {
+public class Player extends GameObject {
 
-    float x, y;
-    float dx, dy;
-    float w = 50;
-    float halfW = w / 2;
-    YASC yasc;
-    float rotation;
-    float speed =5;
+  
     int health;
     int ammo;
 
     // constructor
     public Player(YASC yasc, float x, float y)
     {
-        this.yasc = yasc;
-        this.x = x;
-        this.y = y;
-        rotation = 0;
+        //calling superclass from game object
+        super(yasc, x, y, 0); // 0 for rotation
+
     }//end contructor
 
 
-    void render()
+    public void render()
     {
         yasc.pushMatrix();
         yasc.translate(x, y);
@@ -41,7 +34,27 @@ public class Player {
         yasc.popMatrix();
     }
 
-    void update()
+
+    // method for shooting bullets
+    void shoot(){
+
+        // if the space key is pressed
+        if(yasc.checkKey(' ')){
+
+            float dist = 30; //spawning 30 units infront of the player
+
+            // if the space key is pressed, it instaniates a new bullet object at the same position and 
+            // rotation as the ship (player)
+            Bullet b = new Bullet(yasc, x +(dx * dist), y +(dy * dist), rotation);
+
+
+            // add the bullet to the array list of bullets
+            yasc.bullets.add(b);
+        }//end if
+    }// end method
+
+
+    public void update()
     {
         dx = PApplet.sin(rotation);
         dy =  - PApplet.cos(rotation);
@@ -63,30 +76,11 @@ public class Player {
         if (yasc.checkKey(PApplet.RIGHT))
         {
             rotation += 0.1f;
-        }        
+        }     
+        
+        //calling the method shoot
+        shoot();
     }
 
-    public float getX() {
-        return x;
-    }
-
-    public void setX(float x) {
-        this.x = x;
-    }
-
-    public float getY() {
-        return y;
-    }
-
-    public void setY(float y) {
-        this.y = y;
-    }
-
-    public float getW() {
-        return w;
-    }
-
-    public void setW(float w) {
-        this.w = w;
-    }
+  
 }
