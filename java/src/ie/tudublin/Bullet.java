@@ -12,7 +12,7 @@ public class Bullet extends GameObject {
     // constructor
     public Bullet(YASC yasc,float x, float y, float rotation){
     
-        super(yasc,0,0,0);
+        super(yasc,x,y,rotation);
         // gives the bullets a time frame - of 5 seconds
         lifetime = 5;
 
