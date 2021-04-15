@@ -283,15 +283,21 @@ public class Audio1 extends PApplet {
         // twinkling stars
         case 7: {
           
-            
+            colorMode(HSB);
+            background(0);
+            noStroke();
+            frameRate(30);
             noStroke();
             fill(0,70); //opacity on the fill - this is like a tint
             rect(0,0,width,height);
 
             fill(255);
-            ellipse(random(width), random(height), 14, 12);
+            ellipse(random(width), random(height), 8, 8);
 
         }//end case 7
+
+
+        
         }
     }
 
