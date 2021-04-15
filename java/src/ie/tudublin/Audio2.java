@@ -177,7 +177,7 @@ public class Audio2 extends PApplet {
             ellipseMode(CENTER);
             //ellipse(x , height/2 , w/2, -smoothedBands[i] );
            
-           
+            
              rect(x, height, w, -smoothedBands[i]);
         }
     }

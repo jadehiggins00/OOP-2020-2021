@@ -108,9 +108,15 @@ public class Main
         String[] a = {"MAIN"};
         processing.core.PApplet.runSketch(a, new Stars());
     }
+
+    public void solarSystem()
+    {
+        String[] a = {"MAIN"};
+        processing.core.PApplet.runSketch( a, new SolarSystem());
+    }
     public static void main(String[] args)
     {
         Main main = new Main();
-        main.audio1();
+        main.solarSystem();
     }
 } 
