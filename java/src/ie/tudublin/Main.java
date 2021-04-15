@@ -104,9 +104,52 @@ public class Main
         processing.core.PApplet.runSketch( a, new YASC());
     }
 
+    // strings examples
+    public void strings(){
+        String s = "i may be hungry, but i sure ain't weird";
+
+        String a = s.substring(0,5);
+        String b = s.substring(9,15);
+        String c = s.substring(34); //prints the word weird
+
+
+        System.out.println(a); //prints 'i may'
+        System.out.println(b);
+        System.out.println(c);
+
+    if(s.startsWith("i may"))
+    {
+        System.out.println("starts with i may");
+    }
+
+    if(s.endsWith("weird")){
+        System.out.println("ends with weird");
+    }
+
+    System.out.println(s.toUpperCase());
+
+    int hungryIndex = s.indexOf("hungry"); //prints postion - 9
+    System.out.println(hungryIndex);
+
+    int weirdIndex = s.lastIndexOf("e"); // searches backwards of the string and returns the lcoation of e 
+    System.out.println(weirdIndex);
+
+    String[] words = s.split(" ");
+    for(String ss: words){
+        System.out.println(ss);
+    }//end for
+
+    //printing backwards
+    for(int i=s.length() -1 ; i >= 0; i--)
+    {
+        System.out.println(s.substring(i, i+1));
+    }
+
+    }//endmethod
+
     public static void main(String[] args)
     {
         Main main = new Main();
-        main.yasc();
+        main.strings();
     }
 } 
