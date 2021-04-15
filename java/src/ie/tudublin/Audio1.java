@@ -106,7 +106,7 @@ public class Audio1 extends PApplet {
         case 2: {
             for (int i = 0; i < ab.size(); i++) {
 
-                float c = map(i, 0, ab.size(), 0, 255);
+                float c = map(i, 0, ab.size(), 0, 105);
                 stroke(c, 255, 255);
                 lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);
                 line(0, i, lerpedBuffer[i] * halfHeight * 4, i);

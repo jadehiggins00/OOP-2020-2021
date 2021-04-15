@@ -85,7 +85,7 @@ public class Audio2 extends PApplet {
         colorMode(HSB);
 
         minim = new Minim(this);
-        ap = minim.loadFile("in-for-the-kill.mp3", width);
+        ap = minim.loadFile("pin.mp3", width);
         // for mic input
         ai = minim.getLineIn(Minim.MONO, width, 44100, 16);
         ab = ap.mix; // for mic use ai.mix
@@ -163,14 +163,22 @@ public class Audio2 extends PApplet {
         //   width of the screeen divided byy bands.length
 
         // line(x, height, w, smoothedBands[i]); // this looks cool
-        float w = width / (float) bands.length;
+        float w = width / (float) bands.length ;
+        float border = width /2;
+        float rotation=0;
         for (int i = 0; i < bands.length; i++) {
-            float x = map(i, 0, bands.length, 0, width);
+            float x = map(i, 0, bands.length, 0, height);
+            float y = map(i,0,bands.length,0,width);
             float c = map(i, 0, bands.length, 0, 255);
             noStroke();
             fill(c, 255, 255);
+           
             // smoothed bands contains bands and is using the lerped function
-            rect(x, height, w, -smoothedBands[i]);
+            ellipseMode(CENTER);
+            //ellipse(x , height/2 , w/2, -smoothedBands[i] );
+           
+           
+             rect(x, height, w, -smoothedBands[i]);
         }
     }
 }
