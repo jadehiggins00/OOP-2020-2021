@@ -17,7 +17,11 @@ public class YASC extends PApplet {
     Ammo a; //mkaing an instance
 
     //array list for bullets
-    ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+    ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
+
+    //Polymorphism
+    // the type is of the base class, but the instance is the subclass
+
 
     public void settings() {
         size(500, 500);
@@ -40,7 +44,7 @@ public class YASC extends PApplet {
         background(0);
         
         // size of the array = bullets.size();
-        text("Bullets: " + bullets.size(), 50, 50);
+        text("Bullets: " + gameObjects.size(), 50, 50);
 
         text("FPS: " + frameRate, 50, 100);
 
@@ -59,8 +63,8 @@ public class YASC extends PApplet {
 
 
         // going backwards -> iterate
-        for(int i = bullets.size() - 1; i >= 0; i-- ){
-            Bullet b = bullets.get(i);
+        for(int i = gameObjects.size() - 1; i >= 0; i-- ){
+            GameObject b = gameObjects.get(i);
             b.update();
             b.render();
         }//end for 

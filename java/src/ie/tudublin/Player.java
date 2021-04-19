@@ -49,7 +49,7 @@ public class Player extends GameObject {
 
 
             // add the bullet to the array list of bullets
-            yasc.bullets.add(b);
+            yasc.gameObjects.add(b);
         }//end if
     }// end method
 
