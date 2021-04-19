@@ -50,16 +50,20 @@ public class YASC extends PApplet {
 
         stroke(255);
         //calling player methods
-        p.update();
-        p.render();
+        // p.update();
+        // p.render();
 
-        //calling health methods
-        h.render();
-        h.update();
+        // //calling health methods
+        // h.render();
+        // h.update();
 
-        //calling ammo methods
-        a.render();
-        a.update();
+        // //calling ammo methods
+        // a.render();
+        // a.update();
+
+        gameObjects.add(p);
+        gameObjects.add(h);
+        gameObjects.add(a);
 
 
         // going backwards -> iterate
