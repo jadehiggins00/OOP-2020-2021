@@ -1,6 +1,7 @@
 package ie.tudublin;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 import processing.core.PShape;
 
 
@@ -14,7 +15,8 @@ public class Planet {
     float orbitSpeed;
     float v;
     Planet[] planets;
-
+    //to load images
+    PImage img;
     PShape globe;
 
     // constructor
@@ -24,12 +26,13 @@ public class Planet {
         this.radius = radius;
         this.distance = distance;
         this.o = o;
-    
-               // making a primitive pshape
-            //    if (planets != null) {
+        
+            //     img = solar.loadImage("sun.jpg");
+            // //    making a primitive pshape
+           
             //    globe = solar.createShape(PApplet.SPHERE, radius);
             //    globe.setTexture(solar.img);
-            //    }
+               
 
         angle = solar.random(solar.TWO_PI);
         orbitSpeed = o;
@@ -74,7 +77,9 @@ public class Planet {
         //solar.sphere(radius);
         //shape function renders the object
         // solar.shape(globe);
+        solar.fill(0,255,0);
         solar.sphere(radius);
+  
         
         if (planets != null) {
             for (int i = 0; i < planets.length; i++) {

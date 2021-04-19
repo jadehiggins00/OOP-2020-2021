@@ -25,8 +25,9 @@ public class SolarSystem extends PApplet {
         println(0);
         // frameRate(15);
          //spawn moons 
-         sun.spawnMoons(5);
-         //img = loadImage("sun.jpg");
+         
+         sun.spawnMoons(10);
+ 
     }
 
     public void draw() {
