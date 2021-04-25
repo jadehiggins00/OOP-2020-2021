@@ -103,9 +103,21 @@ public class Main
        processing.core.PApplet.runSketch(a, new Examples1());
    }
 
+   public void pvectorBall(){
+    String[] a = {"MAIN"};
+    processing.core.PApplet.runSketch(a, new PVectorBall();
+}
+
+   public void bouncingBall(){
+    String[] a = {"MAIN"};
+    processing.core.PApplet.runSketch(a, new BouncingBall());
+   }
+
+ 
+
     public static void main(String[] args)
     {
         Main main = new Main();
-        main.audio1();
+        main.audio1();;
     }
 } 
