@@ -104,6 +104,12 @@ public class Main
         processing.core.PApplet.runSketch( a, new YASC());
     }
 
+    public void planets()
+    {
+        String[] a = {"MAIN"};
+        processing.core.PApplet.runSketch( a, new Planet());
+    }
+
     public void strings()
     {
         String s = "I may be hungry, but I sure ain't weird.";
@@ -129,9 +135,12 @@ public class Main
         }
     }
 
+    
+   
+
     public static void main(String[] args)
     {
         Main main = new Main();
-        main.strings();
+        main.planets();
     }
 } 
