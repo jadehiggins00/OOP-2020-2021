@@ -62,6 +62,8 @@ public class Planet {
 
     }// endmethod
 
+    PShape globe1;
+    PImage moon;
     // method to display planet
     public void show() {
        
@@ -77,6 +79,14 @@ public class Planet {
         //solar.sphere(radius);
         //shape function renders the object
         // solar.shape(globe);
+        // moon = loadImage("moon.jpg");
+
+        // globe1 = solar.createShape(PApplet.SPHERE,200);
+        // globe1.setTexture(moon);
+
+        // solar.shape(globe);
+        
+
         solar.fill(0,255,0);
         solar.sphere(radius);
   
@@ -88,6 +98,13 @@ public class Planet {
         }//end if
         solar.popMatrix();
     }// end method
+
+
+
+
+    private PImage loadImage(String string) {
+        return null;
+    }
   
 
 }// end class
