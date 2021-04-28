@@ -19,7 +19,7 @@ public class Audio1 extends PApplet {
 
     public void settings() {
         size(1000, 1000, P3D);
-        //6fullScreen(P3D, SPAN); // Try this for full screen multiple monitor support
+        // 6fullScreen(P3D, SPAN); // Try this for full screen multiple monitor support
         // :-) Be careful of exceptions!
     }
 
@@ -31,7 +31,7 @@ public class Audio1 extends PApplet {
     public void setup() {
         minim = new Minim(this);
         // ai = minim.getLineIn(Minim.MONO, width, 44100, 16);
-        ap = minim.loadFile("violence.mp3", width);
+        ap = minim.loadFile("thestoryofus.mp3", width);
         ap.play();
         ab = ap.mix; // Connect the buffer to the mp3 file
         // ab = ai.mix;
@@ -195,24 +195,32 @@ public class Audio1 extends PApplet {
             PImage saturn;
             PImage earth;
             PImage mars;
+            PImage sun;
+            PImage moon;
+            PImage jupiter;
+            PImage neptune;
+            PImage uranus;
+            PImage mercury;
+            PImage venus;
             // PImage earth;
             PShape globe;
             float deg = 90;
             // not sure where i should put the 's' variable with shape, Pshape etc.
-            float s = radians(deg) + (85 * lerpedAverage * 0.5f);
+            float s = radians(deg) + (85 * lerpedAverage * 0.6f);
 
+            // ------- PLANET SATURN --------
             pushMatrix();
             noStroke();
             saturn = loadImage("saturn2.jpg");
             float rot = 0;
+            // float speed = 10;
+            // rot+=speed;
             rot += s;
 
-            globe = createShape(SPHERE, 100); // creating sphere for globe var
+            globe = createShape(SPHERE, 75); // creating sphere for globe var
             globe.setTexture(saturn); // setting the moon texture onto globe
 
-            // trying to move sphere to music??
-            // for (int i = 0; i < ab.size(); i++) {
-            translate(width / 2, height / 2);
+            translate(530, 220);
             // rotateY(-radians(frameCount)); // rotating slowing
             rotateY(rot);
             lights();
@@ -224,28 +232,28 @@ public class Audio1 extends PApplet {
             noFill();
             rotateX(HALF_PI - .45f);
             float c = map(average, 0, 1, 0, 255);
-            
+
             // the ring around saturn
-            //stroke(102, 65, 79);
-            stroke(c, 255, 255);
-            ellipse(0, 0, 360, 360);
-            //stroke(54, 79, 79);
-            stroke(205,88,81);
-            ellipse(0, 0, 350, 350);
-            //stroke(289, 53, 79);
-            stroke(c, 255, 255);
-            ellipse(0, 0, 340, 340);
-            // stroke(39, 92, 100);
-            //stroke(255);
-            stroke(205,88,81);
-            ellipse(0, 0, 330, 330);
-            //stroke(203, 54, 61);
-            stroke(c, 255, 255);
-            ellipse(0, 0, 320, 320);
-            //stroke(122, 38, 93);
-            //stroke(255);
-            stroke(205,88,81);
-            ellipse(0, 0, 310, 310);
+            stroke(102, 65, 79);
+            // stroke(c, 255, 255);
+            ellipse(0, 0, 260, 260);
+            // stroke(54, 79, 79);
+            stroke(205, 88, 81);
+            ellipse(0, 0, 250, 250);
+            stroke(289, 53, 79);
+            // stroke(c, 255, 255);
+            ellipse(0, 0, 240, 240);
+            stroke(39, 92, 100);
+            // stroke(255);
+            stroke(205, 88, 81);
+            ellipse(0, 0, 230, 230);
+            stroke(203, 54, 61);
+            // stroke(c, 255, 255);
+            ellipse(0, 0, 220, 220);
+            // stroke(122, 38, 93);
+            // stroke(255);
+            stroke(205, 88, 81);
+            ellipse(0, 0, 210, 210);
 
             // inner ring
             stroke(11, 68, 93);
@@ -255,49 +263,145 @@ public class Audio1 extends PApplet {
 
             popMatrix();
 
-            // planet earth
+            // ----- PLANET EARTH -----
             pushMatrix();
             noStroke();
             earth = loadImage("earth.jpg");
-            globe = createShape(SPHERE, 100);
+            globe = createShape(SPHERE, 65);
             globe.setTexture(earth);
-            translate(200, 600);
+            translate(340, 610);
             rotateY(rot);
             lights();
             shape(globe);
             popMatrix();
 
-            //planet mars
+            // ---- EARTHS MOON ----
+            pushMatrix();
+            noStroke();
+            moon = loadImage("moon.jpg");
+            globe = createShape(SPHERE, 17);
+            globe.setTexture(moon);
+            lights();
+            translate(440, 650);
+            rotateY(rot);
+
+            shape(globe);
+            popMatrix();
+
+            // ---------- PLANET MARS ---------
             pushMatrix();
             noStroke();
             mars = loadImage("mars2.jpg");
-            globe = createShape(SPHERE,100);
+            globe = createShape(SPHERE, 50);
             globe.setTexture(mars);
-            translate(800, 400);
+            translate(205, 475);
             rotateY(rot);
             lights();
             shape(globe);
             noFill();
             strokeWeight(2.5f);
-           // rotateY(HALF_PI - .45f);
-
-           
+            // rotateY(HALF_PI - .45f);
             stroke(0, 0, 93);
-            //ellipse(0, 0, 200 +(lerpedAverage * 500), 200+(lerpedAverage * 500));
+            // ellipse(0, 0, 200 +(lerpedAverage * 500), 200+(lerpedAverage * 500));
             popMatrix();
 
-            // milky way
+            // -------- THE SUN --------
             pushMatrix();
-            translate(500, 800);
+            noStroke();
+            noFill();
+            sun = loadImage("sun1.jpg");
+            globe = createShape(SPHERE, 100);
+            globe.setTexture(sun);
+            translate(700, height / 2);
+            rotateY(rot);
+            lights();
+            shape(globe);
+            popMatrix();
+
+            // -------- PLANET JUPITER --------
+            pushMatrix();
+            noStroke();
+            noFill();
+            jupiter = loadImage("jupiter2.jpg");
+            globe = createShape(SPHERE, 82);
+            globe.setTexture(jupiter);
+            translate(150, 140);
+            rotateY(rot);
+            lights();
+            shape(globe);
+            popMatrix();
+
+            // ------- PLANET NEPTUNE -----------------
+            pushMatrix();
+            noStroke();
+            noFill();
+            neptune = loadImage("neptune1.jpg");
+            globe = createShape(SPHERE, 30);
+            globe.setTexture(neptune);
+            translate(850, 100);
+            rotateY(rot);
+            lights();
+            shape(globe);
+            popMatrix();
+
+            // ------- PLANET URANUS --------------
+            pushMatrix();
+            noStroke();
+            noFill();
+            uranus = loadImage("uranus1.jpg");
+            globe = createShape(SPHERE, 20);
+            globe.setTexture(uranus);
+            translate(320, 60);
+            rotateY(rot);
+            lights();
+            shape(globe);
+            popMatrix();
+
+            // -------- PLANET VENUS -------------
+            pushMatrix();
+            noStroke();
+            noFill();
+            venus = loadImage("venus.jpg");
+            globe = createShape(SPHERE, 75);
+            globe.setTexture(venus);
+            translate(790, 800);
+            rotateY(rot);
+            lights();
+            shape(globe);
+            popMatrix();
+
+            // -------- PLANET MERCURYY -------------
+            pushMatrix();
+            noStroke();
+            noFill();
+            mercury = loadImage("mercury.jpg");
+            globe = createShape(SPHERE, 17);
+            globe.setTexture(mercury);
+            translate(880, 600);
+            rotateY(rot);
+            lights();
+            shape(globe);
+            popMatrix();
+
+            // --------- THE MILKY WAY ------
+            pushMatrix();
+            translate(700, 500);
             noFill();
             strokeWeight(1.5f);
-           
 
-            
-            stroke(c, 255, 255);
+            stroke( c,255,255);
             noFill();
-            ellipse(0, 0, 200 +(lerpedAverage * 500), 100+(lerpedAverage * 500));
+            ellipse(0, 0, 370 + (lerpedAverage * 500), 100 + (lerpedAverage * 500)); // first hoop
+
+            ellipse(0, 0, 670 + (lerpedAverage * 500), 200 + (lerpedAverage * 500));// second loop
+            ellipse(0, 0, 1070 + (lerpedAverage * 500), 280 + (lerpedAverage * 500)); // 3
+            // ellipse(0, 0, 1400 + (lerpedAverage * 500), 400 + (lerpedAverage * 500));// 4
+            ellipse(0, 0, 1900 + (lerpedAverage * 500), 600 + (lerpedAverage * 500));
+            // ellipse(0, 0, 2200 + (lerpedAverage * 500), 700 + (lerpedAverage * 500));
+            ellipse(0, 0, 2900 + (lerpedAverage * 500), 800 + (lerpedAverage * 500));
+            // ellipse(0, 0, 3300 +(lerpedAverage * 500), 1000+(lerpedAverage * 500));
             popMatrix();
+
         } // end case 7
         }
     }
