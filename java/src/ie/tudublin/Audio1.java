@@ -19,19 +19,22 @@ public class Audio1 extends PApplet {
 
     public void settings() {
         size(1000, 1000, P3D);
-        // 6fullScreen(P3D, SPAN); // Try this for full screen multiple monitor support
+        // fullScreen(P3D, SPAN); // Try this for full screen multiple monitor support
         // :-) Be careful of exceptions!
     }
 
     float y = 200;
     float lerpedY = y;
-
+    float x;
+    float dx, dy;
+    float w = 50;
+    float rotation = 0;
     int which = 0;
 
     public void setup() {
         minim = new Minim(this);
         // ai = minim.getLineIn(Minim.MONO, width, 44100, 16);
-        ap = minim.loadFile("thestoryofus.mp3", width);
+        ap = minim.loadFile("violence.mp3", width);
         ap.play();
         ab = ap.mix; // Connect the buffer to the mp3 file
         // ab = ai.mix;
@@ -86,8 +89,16 @@ public class Audio1 extends PApplet {
                 stroke(c, 255, 255);
                 lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);
 
-                line(i, halfHeight - lerpedBuffer[i] * halfHeight * 4, halfHeight + lerpedBuffer[i] * halfHeight * 4,
-                        i);
+                line(i / 2, halfHeight + lerpedBuffer[i] * halfHeight * 4,
+                        halfHeight + lerpedBuffer[i] * halfHeight * 4, i / 2);
+
+                // fill(c, 255, 255);
+                // // rect(i, halfHeight - lerpedBuffer[i] * halfHeight * 4, halfHeight +
+                // lerpedBuffer[i] * halfHeight * 4,
+                // // i);
+                // ellipse(i, halfHeight - lerpedBuffer[i] * halfHeight * 4, halfHeight +
+                // lerpedBuffer[i] * halfHeight * 4,
+                // i);
             }
             break;
         }
@@ -98,8 +109,12 @@ public class Audio1 extends PApplet {
                 float c = map(i, 0, ab.size(), 0, 255);
                 stroke(c, 255, 255);
                 lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);
-                line(i, halfHeight - lerpedBuffer[i] * halfHeight * 4, i,
-                        halfHeight + lerpedBuffer[i] * halfHeight * 4);
+                // line(i, halfHeight - lerpedBuffer[i] * halfHeight * 4, i,
+                // halfHeight + lerpedBuffer[i] * halfHeight * 4);
+                strokeWeight(0.5f);
+                fill(0);
+                rect(i, halfHeight - lerpedBuffer[i] * halfHeight * 3, i,
+                        halfHeight + lerpedBuffer[i] * halfHeight * 3);
             }
             break;
         }
@@ -138,23 +153,179 @@ public class Audio1 extends PApplet {
             break;
         }
         case 5: {
+
             float r = 1f;
             int numPoints = 3;
             float thetaInc = TWO_PI / (float) numPoints;
-            strokeWeight(2);
-            float lastX = width / 2, lastY = height / 2;
-            for (int i = 0; i < 1000; i++) {
-                float c = map(i, 0, 300, 0, 255) % 255.0f;
+
+            float lastX = 400, lastY = 700;
+
+            // // --------- first loop -------
+            // pushMatrix();
+            // for (int i = 0; i < 70; i++) {
+            // float c = map(i, 0, 500, 0, 255) % 255.0f;
+            // strokeWeight(2);
+            // stroke(c, 255, 255, 100);
+            // float theta = i * (thetaInc + lerpedAverage * 5);
+
+            // pushMatrix();
+            // float x = width + sin(theta) * r;
+            // float y = height - cos(theta) * r;
+            // r += 0.8f + lerpedAverage;
+
+            // fill(0);
+            // translate(height / 2, width / 2);
+            // ellipse(0, 0, x, y);
+            // popMatrix();
+
+            // lastX = x;
+            // lastY = y;
+
+            // } // end loop
+            // popMatrix();
+
+            // // -------- SECOND LOOP ------
+            // pushMatrix();
+            // for (int i = 0; i < 70; i++) {
+            // float c = map(i, 0, 500, 100, 255) % 255.0f;
+            // strokeWeight(2);
+            // stroke(c, 255, 255, 100);
+            // float theta = i * (thetaInc + lerpedAverage * 5);
+            // pushMatrix();
+            // x = 890 + sin(theta) * r;
+            // y = 890 - cos(theta) * r;
+            // r += 0.8f + lerpedAverage;
+
+            // fill(0);
+            // translate(height / 2, width / 2);
+            // ellipse(0, 0, x, y);
+
+            // popMatrix();
+            // lastX = x;
+            // lastY = y;
+
+            // } /// end loop
+            // popMatrix();
+
+            // -------- THIRD LOOP ------
+            pushMatrix();
+            for (int i = 0; i < 45; i++) {
+                float c = map(i, 0, 500, 130, 210) % 255.0f;
+                strokeWeight(1);
                 stroke(c, 255, 255, 100);
                 float theta = i * (thetaInc + lerpedAverage * 5);
-                float x = width / 2 + sin(theta) * r;
-                float y = height / 2 - cos(theta) * r;
-                r += 0.5f + lerpedAverage;
-                line(lastX, lastY, x, y);
+                pushMatrix();
+                x = 700 + sin(theta) * r;
+                y = 420 - cos(theta) * r;
+                r += 0.8f + lerpedAverage;
+
+                angle += 1;
+                fill(0);
+                translate(height / 2, width / 2);
+              //  rotate(angle);
+                ellipse(0, 0, x, y);
+
+                popMatrix();
                 lastX = x;
                 lastY = y;
-            }
-            // ??
+
+            } /// end loop
+            popMatrix();
+
+            // -------- FOURTH LOOP ------
+            pushMatrix();
+            for (int i = 0; i < 45; i++) {
+                float c = map(i, 0, 500, 199, 225) % 255.0f;
+                strokeWeight(2);
+                stroke(c, 255, 255, 100);
+                float theta = i * (thetaInc + lerpedAverage * 5);
+                pushMatrix();
+                x = 470 + sin(theta) * r;
+                y = 800 - cos(theta) * r;
+                r += 0.8f + lerpedAverage;
+
+                fill(0);
+                translate(height / 2, width / 2);
+                rotate(angle);
+                ellipse(0, 0, x, y);
+
+                popMatrix();
+                lastX = x;
+                lastY = y;
+
+            } /// end loop
+            popMatrix();
+
+            // -------- FIFTH LOOP ------
+            pushMatrix();
+            for (int i = 0; i < 65; i++) {
+                float c = map(i, 0, 500, 240, 255) % 255.0f;
+                strokeWeight(2);
+                stroke(c, 255, 255, 100);
+                float theta = i * (thetaInc + lerpedAverage * 5);
+                pushMatrix();
+                x = 460 + sin(theta) * r;
+                y = 460 - cos(theta) * r;
+                r += 0.8f + lerpedAverage;
+
+                fill(0);
+                translate(height / 2, width / 2);
+           
+                ellipse(0, 0, x, y);
+
+                popMatrix();
+                lastX = x;
+                lastY = y;
+
+            } /// end loop
+            popMatrix();
+
+            // -------- SIXTH LOOP ------
+            pushMatrix();
+            for (int i = 0; i < 55; i++) {
+                float c = map(i, 0, 500, 0, 255) % 255.0f;
+                strokeWeight(2);
+                stroke(c, 255, 255, 100);
+                float theta = i * (thetaInc + lerpedAverage * 5);
+                pushMatrix();
+                x = 360 + sin(theta) * r;
+                y = 360 - cos(theta) * r;
+                r += 0.8f + lerpedAverage;
+
+                fill(0);
+                translate(height / 2, width / 2);
+                ellipse(0, 0, x, y);
+
+                popMatrix();
+                lastX = x;
+                lastY = y;
+
+            } /// end loop
+            popMatrix();
+
+            // -------- SEVENTH LOOP ------
+            pushMatrix();
+            for (int i = 0; i < 55; i++) {
+                float c = map(i, 0, 500, 110, 255) % 255.0f;
+                strokeWeight(2);
+                stroke(c, 255, 255, 100);
+                float theta = i * (thetaInc + lerpedAverage * 5);
+                pushMatrix();
+                x = 260 + sin(theta) * r;
+                y = 260 - cos(theta) * r;
+                r += 0.8f + lerpedAverage;
+
+                fill(0);
+                translate(height / 2, width / 2);
+                ellipse(0, 0, x, y);
+
+                popMatrix();
+                lastX = x;
+                lastY = y;
+
+            } /// end loop
+            popMatrix();
+
             break;
         }
         case 6: {
@@ -206,7 +377,7 @@ public class Audio1 extends PApplet {
             PShape globe;
             float deg = 90;
             // not sure where i should put the 's' variable with shape, Pshape etc.
-            float s = radians(deg) + (85 * lerpedAverage * 0.6f);
+            float s = radians(deg) + (85 * lerpedAverage * 0.5f);
 
             // ------- PLANET SATURN --------
             pushMatrix();
@@ -371,17 +542,17 @@ public class Audio1 extends PApplet {
             popMatrix();
 
             // -------- PLANET MERCURYY -------------
-            pushMatrix();
-            noStroke();
-            noFill();
-            mercury = loadImage("mercury.jpg");
-            globe = createShape(SPHERE, 17);
-            globe.setTexture(mercury);
-            translate(880, 600);
-            rotateY(rot);
-            lights();
-            shape(globe);
-            popMatrix();
+            // pushMatrix();
+            // noStroke();
+            // noFill();
+            // mercury = loadImage("mercury.jpg");
+            // globe = createShape(SPHERE, 17);
+            // globe.setTexture(mercury);
+            // translate(880, 600);
+            // rotateY(rot);
+            // lights();
+            // shape(globe);
+            // popMatrix();
 
             // --------- THE MILKY WAY ------
             pushMatrix();
@@ -389,7 +560,7 @@ public class Audio1 extends PApplet {
             noFill();
             strokeWeight(1.5f);
 
-            stroke( c,255,255);
+            stroke(c, 255, 255);
             noFill();
             ellipse(0, 0, 370 + (lerpedAverage * 500), 100 + (lerpedAverage * 500)); // first hoop
 
@@ -403,6 +574,11 @@ public class Audio1 extends PApplet {
             popMatrix();
 
         } // end case 7
+            break;
+        case 8: {
+
         }
-    }
+        }
+    }// end draw method
+
 }

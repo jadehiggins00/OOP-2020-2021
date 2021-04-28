@@ -75,7 +75,7 @@ public class Audio2 extends PApplet {
         colorMode(HSB);
 
         minim = new Minim(this);
-        ap = minim.loadFile("heroplanet.mp3", width);
+        ap = minim.loadFile("violence.mp3", width);
         ai = minim.getLineIn(Minim.MONO, width, 44100, 16); 
         ab = ap.mix;
 
@@ -143,11 +143,16 @@ public class Audio2 extends PApplet {
         float w = width / (float) bands.length;
         for(int i = 0 ; i < bands.length ; i ++)
         {
-            float x = map(i, 0, bands.length, 0, width);
+            float x = map(i, 0, bands.length, 200, height);
             float c = map(i, 0, bands.length, 0, 255);
             noStroke();
             fill(c, 255, 255);
-            rect(x, height, w, -smoothedBands[i]);
+            float angle =0;
+         
+            rotate(angle);
+            rect(x, height/2, w, -smoothedBands[i]);
+           // ellipse(x,height/2,60,-smoothedBands[i] -50);
+            
         }    
     }
 }
