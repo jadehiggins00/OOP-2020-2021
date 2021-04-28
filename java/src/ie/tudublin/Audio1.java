@@ -209,7 +209,7 @@ public class Audio1 extends PApplet {
 
             // -------- THIRD LOOP ------
             pushMatrix();
-            for (int i = 0; i < 45; i++) {
+            for (int i = 0; i < 75; i++) {
                 float c = map(i, 0, 500, 130, 210) % 255.0f;
                 strokeWeight(1);
                 stroke(c, 255, 255, 100);
@@ -219,7 +219,7 @@ public class Audio1 extends PApplet {
                 y = 420 - cos(theta) * r;
                 r += 0.8f + lerpedAverage;
 
-                angle += 1;
+                angle += 0;
                 fill(0);
                 translate(height / 2, width / 2);
               //  rotate(angle);
