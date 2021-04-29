@@ -19,7 +19,7 @@ public class Audio1 extends PApplet {
 
     public void settings() {
         size(1000, 1000, P3D);
-        // fullScreen(P3D, SPAN); // Try this for full screen multiple monitor support
+        //fullScreen(P3D, SPAN); // Try this for full screen multiple monitor support
         // :-) Be careful of exceptions!
     }
 
@@ -222,7 +222,7 @@ public class Audio1 extends PApplet {
                 angle += 0;
                 fill(0);
                 translate(height / 2, width / 2);
-              //  rotate(angle);
+                rotate(r);
                 ellipse(0, 0, x, y);
 
                 popMatrix();
@@ -246,7 +246,7 @@ public class Audio1 extends PApplet {
 
                 fill(0);
                 translate(height / 2, width / 2);
-                rotate(angle);
+               // rotate(r);
                 ellipse(0, 0, x, y);
 
                 popMatrix();
